@@ -7,8 +7,25 @@
   padding: 10px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   img {
     width: 200px;
   }
+}
+
+.btn-show-details {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: $madder;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  border: 0;
+  font-size: 15px;
+  cursor: pointer;
 }

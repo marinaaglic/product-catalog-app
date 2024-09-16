@@ -6,18 +6,17 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const truncatedDescription =
+    product.description.length > 100
+      ? product.description.slice(0, 100) + "..."
+      : product.description;
   return (
     <div className="product-card">
       <img src={product.thumbnail} alt={product.title} />
       <h2>{product.title}</h2>
-      <p>{product.description}</p>
+      <p>{truncatedDescription}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
-      <p>Discount: {product.discountPercentage}%</p>
-      <p>Rating: {product.rating}</p>
-      <p>Stock: {product.stock}</p>
-      <p>Category: {product.category}</p>
-      <p>Brand: {product.brand}</p>
-      <button> Show details</button>
+      <button className="btn-show-details"> Show details</button>
     </div>
   );
 }
