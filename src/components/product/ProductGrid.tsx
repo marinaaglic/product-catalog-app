@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchProducts } from "../../utils/api/api";
 import ProductCard from "./ProductCard";
 import { Product } from "../../utils/types";
+import "../../styles/_productGrid.scss";
 
 export default function ProductGrid() {
   const [products, setProducts] = useState<Product[] | undefined>([]);

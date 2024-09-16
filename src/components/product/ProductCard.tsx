@@ -1,4 +1,5 @@
 import { Product } from "../../utils/types";
+import "../../styles/_productCard.scss";
 
 interface ProductCardProps {
   product: Product;
@@ -16,6 +17,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <p>Stock: {product.stock}</p>
       <p>Category: {product.category}</p>
       <p>Brand: {product.brand}</p>
+      <button> Show details</button>
     </div>
   );
 }
