@@ -1,7 +1,12 @@
 import "./App.css";
+import ProductGrid from "./components/product/ProductGrid";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <ProductGrid />
+    </>
+  );
 }
 
 export default App;
