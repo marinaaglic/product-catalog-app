@@ -61,8 +61,10 @@ export default function ProductGrid() {
   }
   return (
     <div>
-      <Filter onCategoryChange={handleCategoryChange} />
-      <Sort onSortingOptionChange={handleSortOption} />
+      <div className="div-filter-sort">
+        <Filter onCategoryChange={handleCategoryChange} />
+        <Sort onSortingOptionChange={handleSortOption} />
+      </div>
       <div className="grid-product">
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
