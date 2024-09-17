@@ -13,8 +13,8 @@ export default function Sort({ onSortingOptionChange }: SortProps) {
         <option value="">Sort by</option>
         <option value="price-asc">Price (min-max)</option>
         <option value="price-desc">Price(max-min)</option>
-        <option value="name-asc">Name (A-Z)</option>
-        <option value="name-desc">Name (A-Z)</option>
+        <option value="title-asc">Name (A-Z)</option>
+        <option value="title-desc">Name (Z-A)</option>
       </select>
     </div>
   );
