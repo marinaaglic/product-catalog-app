@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../../utils/api/api";
 import { Category } from "../../utils/types";
+import "../../styles/_filter.scss";
 
 export default function Filter() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -19,7 +20,7 @@ export default function Filter() {
     setSelectedCategory(event.target.value);
   };
   return (
-    <div>
+    <div className="custom-select">
       <select value={selectedCategory} onChange={handleChange}>
         {categories?.map((category) => (
           <option key={category.slug} value={category.slug}>
