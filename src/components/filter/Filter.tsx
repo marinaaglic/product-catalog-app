@@ -3,7 +3,11 @@ import { fetchCategories } from "../../utils/api/api";
 import { Category } from "../../utils/types";
 import "../../styles/_filter.scss";
 
-export default function Filter() {
+interface FilterProps {
+  onCategoryChange: (category: string) => void;
+}
+
+export default function Filter({ onCategoryChange }: FilterProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>();
   useEffect(() => {
@@ -17,11 +21,14 @@ export default function Filter() {
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategory(event.target.value);
+    const selectedValue = event.target.value;
+    setSelectedCategory(selectedValue);
+    onCategoryChange(selectedValue);
   };
   return (
     <div className="custom-select">
       <select value={selectedCategory} onChange={handleChange}>
+        <option value="">Select a category</option>
         {categories?.map((category) => (
           <option key={category.slug} value={category.slug}>
             {category.name}
