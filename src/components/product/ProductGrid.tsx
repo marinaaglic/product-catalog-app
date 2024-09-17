@@ -3,6 +3,7 @@ import { fetchProducts } from "../../utils/api/api";
 import ProductCard from "./ProductCard";
 import { Product } from "../../utils/types";
 import "../../styles/_productGrid.scss";
+import Filter from "../filter/Filter";
 
 export default function ProductGrid() {
   const [products, setProducts] = useState<Product[] | undefined>([]);
@@ -19,10 +20,13 @@ export default function ProductGrid() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="grid-product">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div>
+      <Filter />
+      <div className="grid-product">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }
