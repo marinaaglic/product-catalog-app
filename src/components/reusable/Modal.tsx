@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import "../../styles/_modal.scss";
 
 interface ModalProps {
   title: string;
