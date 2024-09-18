@@ -1,13 +1,34 @@
+@import "_colors.scss";
+
 .input-wrapper {
   label {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 15px;
   }
+}
 
-  input {
-    font-family: "Roboto", sans-serif;
-    width: 50px;
-    border-radius: 3px;
+.range-input input {
+  width: 50px;
+  border-radius: 5px;
+  height: 20px;
+  border: 1px solid $chocolate-cosmos;
+}
+
+.search-input input {
+  width: 600px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid $chocolate-cosmos;
+
+  @media (max-width: 1060px) {
+    width: 500px;
+  }
+  @media (max-width: 980px) {
+    width: 300px;
+  }
+  @media (max-width: 860px) {
+    width: 200px;
   }
 }

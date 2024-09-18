@@ -8,6 +8,7 @@ import PriceRangeFilter from "../filter/PriceRangeFilter";
 import { useProductContext } from "../../context/ProductContext";
 import Modal from "../reusable/Modal";
 import ProductDetails from "./ProductDetails";
+import Search from "../filter/Search";
 
 export default function ProductGrid() {
   const { products, loading } = useProductContext();
@@ -18,6 +19,7 @@ export default function ProductGrid() {
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [searchProduct, setSearchProduct] = useState<string>("");
 
   useEffect(() => {
     let currentProducts = [...products];
@@ -40,6 +42,12 @@ export default function ProductGrid() {
       );
     }
 
+    if (searchProduct) {
+      currentProducts = currentProducts.filter((product) =>
+        product.title.toLowerCase().includes(searchProduct.toLowerCase())
+      );
+    }
+
     if (sortOption) {
       currentProducts.sort((a, b) => {
         if (sortOption === "price-asc") {
@@ -55,7 +63,14 @@ export default function ProductGrid() {
       });
     }
     setFilteredProducts(currentProducts);
-  }, [selectedCategory, sortOption, products, minPrice, maxPrice]);
+  }, [
+    selectedCategory,
+    sortOption,
+    products,
+    minPrice,
+    maxPrice,
+    searchProduct,
+  ]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -71,6 +86,10 @@ export default function ProductGrid() {
 
   const handleMaxPriceChange = (price: number) => {
     setMaxPrice(price);
+  };
+
+  const handleSearchProduct = (name: string) => {
+    setSearchProduct(name);
   };
 
   const openModal = (product: Product) => {
@@ -89,6 +108,7 @@ export default function ProductGrid() {
   return (
     <div>
       <div className="div-filter-sort">
+        <Search onSearchProduct={handleSearchProduct} />
         <CategoryFilter onCategoryChange={handleCategoryChange} />
         <Sort onSortingOptionChange={handleSortOption} />
         <PriceRangeFilter
