@@ -3,7 +3,7 @@ import { fetchProducts } from "../../utils/api/api";
 import ProductCard from "./ProductCard";
 import { Product } from "../../utils/types";
 import "../../styles/_productGrid.scss";
-import Filter from "../filter/Filter";
+import CategoryFilter from "../filter/CategoryFilter";
 import Sort from "../sort/Sort";
 
 export default function ProductGrid() {
@@ -62,7 +62,7 @@ export default function ProductGrid() {
   return (
     <div>
       <div className="div-filter-sort">
-        <Filter onCategoryChange={handleCategoryChange} />
+        <CategoryFilter onCategoryChange={handleCategoryChange} />
         <Sort onSortingOptionChange={handleSortOption} />
       </div>
       <div className="grid-product">
