@@ -11,7 +11,6 @@ import { Product } from "../utils/types";
 type ProductContextType = {
   products: Product[];
   loading: boolean;
-  error: string | null;
 };
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
@@ -19,7 +18,6 @@ const ProductContext = createContext<ProductContextType | undefined>(undefined);
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -29,7 +27,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
           setProducts(data.products);
         }
       } catch (error) {
-        setError("Error getting products.");
+        console.log("Error fetching products, ", error);
       } finally {
         setLoading(false);
       }
@@ -37,7 +35,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     loadProducts();
   }, []);
   return (
-    <ProductContext.Provider value={{ products, loading, error }}>
+    <ProductContext.Provider value={{ products, loading }}>
       {children}
     </ProductContext.Provider>
   );

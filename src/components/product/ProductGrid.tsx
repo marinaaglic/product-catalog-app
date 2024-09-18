@@ -1,29 +1,19 @@
 import { useState, useEffect } from "react";
-import { fetchProducts } from "../../utils/api/api";
 import ProductCard from "./ProductCard";
 import { Product } from "../../utils/types";
 import "../../styles/_productGrid.scss";
 import CategoryFilter from "../filter/CategoryFilter";
 import Sort from "../sort/Sort";
 import PriceRangeFilter from "../filter/PriceRangeFilter";
+import { useProductContext } from "../../context/ProductContext";
 
 export default function ProductGrid() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { products, loading } = useProductContext();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      const data = await fetchProducts();
-      if (data) {
-        setProducts(data.products);
-      }
-    };
-    loadProducts();
-  }, []);
 
   useEffect(() => {
     let currentProducts = [...products];
@@ -79,7 +69,7 @@ export default function ProductGrid() {
     setMaxPrice(price);
   };
 
-  if (!products) {
+  if (loading) {
     return <div>Loading...</div>;
   }
   return (
