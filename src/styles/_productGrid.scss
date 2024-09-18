@@ -26,6 +26,10 @@
   justify-content: flex-start;
   margin-bottom: 20px;
   margin-top: 20px;
+
+  @media (max-width: 658px) {
+    flex-direction: column;
+  }
 }
 
 .product-details {
