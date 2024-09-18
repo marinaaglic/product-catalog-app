@@ -6,13 +6,11 @@ interface SearchProps {
 }
 
 export default function Search({ onSearchProduct }: SearchProps) {
-  const [searchValue, setSearchValue] = useState<string>();
+  const [searchValue, setSearchValue] = useState<string>("");
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchValue(value);
-    if (!value) {
-      onSearchProduct(value);
-    }
+    onSearchProduct(value);
   };
   return (
     <div>
