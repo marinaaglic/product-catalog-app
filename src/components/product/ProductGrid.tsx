@@ -108,7 +108,7 @@ export default function ProductGrid() {
       {selectedProduct && (
         <Modal
           title={selectedProduct.title}
-          buttonText="Close"
+          buttonText="OK"
           open={modalOpen}
           onClose={closeModal}
         >
