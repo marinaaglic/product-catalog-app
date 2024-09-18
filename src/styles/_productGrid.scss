@@ -18,3 +18,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+.div-filter-sort {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  justify-content: flex-end;
+}

@@ -1,0 +1,15 @@
+@import "_colors.scss";
+
+.custom-select {
+  margin-bottom: 10px;
+
+  select {
+    background-color: $cardinal;
+    border-radius: 10px;
+    padding: 6px;
+    border: none;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    font-size: 13px;
+  }
+}
