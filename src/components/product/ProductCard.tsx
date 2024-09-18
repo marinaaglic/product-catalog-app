@@ -3,9 +3,13 @@ import "../../styles/_productCard.scss";
 
 interface ProductCardProps {
   product: Product;
+  onShowDetails: () => void;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  onShowDetails,
+}: ProductCardProps) {
   const truncatedDescription =
     product.description.length > 100
       ? product.description.slice(0, 100) + "..."
@@ -16,7 +20,10 @@ export default function ProductCard({ product }: ProductCardProps) {
       <h2>{product.title}</h2>
       <p>{truncatedDescription}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
-      <button className="btn-show-details"> Show details</button>
+      <button className="btn-show-details" onClick={onShowDetails}>
+        {" "}
+        Show details
+      </button>
     </div>
   );
 }

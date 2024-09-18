@@ -6,6 +6,8 @@ import CategoryFilter from "../filter/CategoryFilter";
 import Sort from "../sort/Sort";
 import PriceRangeFilter from "../filter/PriceRangeFilter";
 import { useProductContext } from "../../context/ProductContext";
+import Modal from "../reusable/Modal";
+import ProductDetails from "./ProductDetails";
 
 export default function ProductGrid() {
   const { products, loading } = useProductContext();
@@ -14,6 +16,8 @@ export default function ProductGrid() {
   const [sortOption, setSortOption] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     let currentProducts = [...products];
@@ -69,6 +73,16 @@ export default function ProductGrid() {
     setMaxPrice(price);
   };
 
+  const openModal = (product: Product) => {
+    setSelectedProduct(product);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedProduct(null);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -84,9 +98,23 @@ export default function ProductGrid() {
       </div>
       <div className="grid-product">
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            onShowDetails={() => openModal(product)}
+          />
         ))}
       </div>
+      {selectedProduct && (
+        <Modal
+          title={selectedProduct.title}
+          buttonText="OK"
+          open={modalOpen}
+          onClose={closeModal}
+        >
+          <ProductDetails product={selectedProduct} />
+        </Modal>
+      )}
     </div>
   );
 }
