@@ -39,7 +39,7 @@
 }
 
 .btn-close {
-  background-color: $primary;
+  background-color: $madder;
   color: white;
   padding: 10px 15px;
   border-radius: 10px;
@@ -48,16 +48,4 @@
   font-size: 13px;
   cursor: pointer;
   margin-right: 10px;
-}
-
-.btn-close {
-  background-color: $madder;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-family: "Roboto", sans-serif;
-  border: 0;
-  font-size: 13px;
-  margin-top: 20px;
-  cursor: pointer;
 }
