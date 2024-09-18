@@ -5,12 +5,15 @@ import { Product } from "../../utils/types";
 import "../../styles/_productGrid.scss";
 import CategoryFilter from "../filter/CategoryFilter";
 import Sort from "../sort/Sort";
+import PriceRangeFilter from "../filter/PriceRangeFilter";
 
 export default function ProductGrid() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>("");
+  const [minPrice, setMinPrice] = useState<number | null>(null);
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -31,6 +34,18 @@ export default function ProductGrid() {
       );
     }
 
+    if (minPrice !== null) {
+      currentProducts = currentProducts.filter(
+        (product) => product.price >= minPrice
+      );
+    }
+
+    if (maxPrice !== null) {
+      currentProducts = currentProducts.filter(
+        (products) => products.price <= maxPrice
+      );
+    }
+
     if (sortOption) {
       currentProducts.sort((a, b) => {
         if (sortOption === "price-asc") {
@@ -46,7 +61,7 @@ export default function ProductGrid() {
       });
     }
     setFilteredProducts(currentProducts);
-  }, [selectedCategory, sortOption, products]);
+  }, [selectedCategory, sortOption, products, minPrice, maxPrice]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -54,6 +69,14 @@ export default function ProductGrid() {
 
   const handleSortOption = (option: string) => {
     setSortOption(option);
+  };
+
+  const handleMinPriceChange = (price: number) => {
+    setMinPrice(price);
+  };
+
+  const handleMaxPriceChange = (price: number) => {
+    setMaxPrice(price);
   };
 
   if (!products) {
@@ -64,6 +87,10 @@ export default function ProductGrid() {
       <div className="div-filter-sort">
         <CategoryFilter onCategoryChange={handleCategoryChange} />
         <Sort onSortingOptionChange={handleSortOption} />
+        <PriceRangeFilter
+          onMinPriceChange={handleMinPriceChange}
+          onMaxPriceChange={handleMaxPriceChange}
+        />
       </div>
       <div className="grid-product">
         {filteredProducts.map((product) => (

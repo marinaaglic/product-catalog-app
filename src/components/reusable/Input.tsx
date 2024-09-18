@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { InputType } from "../../utils/types/input";
-import "../../styles/_input.scss";
 
 function Input(
   { label, id, error, ...props }: InputType,
