@@ -1,3 +1,5 @@
+@import "_colors.scss";
+
 .input-wrapper {
   label {
     font-family: "Roboto", sans-serif;
@@ -10,6 +12,7 @@
   width: 50px;
   border-radius: 5px;
   height: 20px;
+  border: 1px solid $chocolate-cosmos;
 }
 
 .search-input input {
@@ -17,6 +20,7 @@
   height: 30px;
   font-size: 15px;
   border-radius: 5px;
+  border: 1px solid $chocolate-cosmos;
 
   @media (max-width: 1060px) {
     width: 500px;
