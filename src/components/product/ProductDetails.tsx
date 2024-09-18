@@ -1,6 +1,6 @@
 import { Product } from "../../utils/types";
 
-export default function ProductDetails(product: Product) {
+export default function ProductDetails({ product }: { product: Product }) {
   return (
     <div className="product-details">
       <img src={product.images[0]} alt={product.title} />

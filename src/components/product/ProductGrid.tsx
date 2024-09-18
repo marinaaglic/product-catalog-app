@@ -7,6 +7,7 @@ import Sort from "../sort/Sort";
 import PriceRangeFilter from "../filter/PriceRangeFilter";
 import { useProductContext } from "../../context/ProductContext";
 import Modal from "../reusable/Modal";
+import ProductDetails from "./ProductDetails";
 
 export default function ProductGrid() {
   const { products, loading } = useProductContext();
@@ -111,19 +112,7 @@ export default function ProductGrid() {
           open={modalOpen}
           onClose={closeModal}
         >
-          <div className="product-details">
-            <img src={selectedProduct.images[0]} alt={selectedProduct.title} />
-            <h3>{selectedProduct.title}</h3>
-            <p>{selectedProduct.description}</p>
-            <p>Price: ${selectedProduct.price.toFixed(2)}</p>
-            <p>Category: {selectedProduct.category}</p>
-            <p>Rating: {selectedProduct.rating}</p>
-            <p>Stock: {selectedProduct.stock}</p>
-            <p>Availability status: {selectedProduct.availabilityStatus}</p>
-            <p>Warranty: {selectedProduct.warrantyInformation}</p>
-            <p>Shipping: {selectedProduct.shippingInformation}</p>
-            <p>Return Policy: {selectedProduct.returnPolicy}</p>
-          </div>
+          <ProductDetails product={selectedProduct} />
         </Modal>
       )}
     </div>
