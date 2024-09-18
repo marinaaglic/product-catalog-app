@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from "react";
 
 export type InputType = {
-  label: string;
+  label?: string;
   id: string;
   error?: string;
 } & ComponentPropsWithoutRef<"input">;

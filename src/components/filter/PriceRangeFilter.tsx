@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "../reusable/Input";
+import "../../styles/_priceRangeFilter.scss";
 
 interface PriceRangeFilterProps {
   onMinPriceChange: (price: number) => void;
@@ -33,18 +34,19 @@ export default function PriceRangeFilter({
     <div className="div-price-range">
       <Input
         type="number"
-        label="Min price"
         id="min-price"
         name="min-price"
         value={minPrice !== null ? minPrice : ""}
+        placeholder="$"
         onChange={handleMinPriceChange}
       />
+      <span> TO </span>
       <Input
         type="number"
-        label="Max price"
         id="max-price"
         name="max-price"
         value={maxPrice !== null ? maxPrice : ""}
+        placeholder="$"
         onChange={handleMaxPriceChange}
       />
     </div>

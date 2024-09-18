@@ -1,0 +1,16 @@
+.input-wrapper {
+  display: flex;
+  gap: 3px;
+
+  label {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  input {
+    font-family: "Roboto", sans-serif;
+    width: 50px;
+    border-radius: 3px;
+  }
+}
