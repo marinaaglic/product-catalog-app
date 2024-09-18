@@ -17,6 +17,7 @@ export default function Search({ onSearchProduct }: SearchProps) {
       <Input
         type="text"
         id="search-value"
+        className="search-input"
         placeholder="Search"
         value={searchValue}
         onChange={handleSearch}

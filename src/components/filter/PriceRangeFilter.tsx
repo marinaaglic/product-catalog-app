@@ -36,6 +36,7 @@ export default function PriceRangeFilter({
         type="number"
         id="min-price"
         name="min-price"
+        className="range-input"
         value={minPrice !== null ? minPrice : ""}
         placeholder="$"
         onChange={handleMinPriceChange}
@@ -45,6 +46,7 @@ export default function PriceRangeFilter({
         type="number"
         id="max-price"
         name="max-price"
+        className="range-input"
         value={maxPrice !== null ? maxPrice : ""}
         placeholder="$"
         onChange={handleMaxPriceChange}

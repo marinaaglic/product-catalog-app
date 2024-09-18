@@ -3,20 +3,13 @@ import { InputType } from "../../utils/types/input";
 import "../../styles/_input.scss";
 
 function Input(
-  { label, id, width, height, error, ...props }: InputType,
+  { label, id, className, error, ...props }: InputType,
   ref: React.ForwardedRef<HTMLInputElement>
 ) {
   return (
-    <div className="input-wrapper">
+    <div className={`input-wrapper ${className ? className : ""}`}>
       <label htmlFor={id}>{label}</label>
-      <input
-        id={id}
-        name={id}
-        width={width}
-        height={height}
-        ref={ref}
-        {...props}
-      />
+      <input id={id} name={id} ref={ref} {...props} />
     </div>
   );
 }

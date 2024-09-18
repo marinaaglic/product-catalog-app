@@ -4,10 +4,17 @@
     font-weight: 500;
     font-size: 15px;
   }
+}
 
-  input {
-    font-family: "Roboto", sans-serif;
-    width: 50px;
-    border-radius: 3px;
-  }
+.range-input input {
+  width: 50px;
+  border-radius: 5px;
+  height: 20px;
+}
+
+.search-input input {
+  width: 600px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 5px;
 }
