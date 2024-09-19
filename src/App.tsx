@@ -1,11 +1,11 @@
 import "./App.css";
-import ProductGrid from "./components/product/ProductGrid";
+import ProductPage from "./pages";
 import { ProductProvider } from "./context/ProductContext";
 
 function App() {
   return (
     <ProductProvider>
-      <ProductGrid />
+      <ProductPage />
     </ProductProvider>
   );
 }
