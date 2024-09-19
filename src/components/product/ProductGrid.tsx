@@ -75,7 +75,12 @@ export default function ProductGrid() {
     minPrice,
     maxPrice,
     searchProduct,
+    currentPage,
   ]);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -122,7 +127,7 @@ export default function ProductGrid() {
         />
       </div>
       <div className="grid-product">
-        {filteredProducts.map((product) => (
+        {paginatedProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
