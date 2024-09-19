@@ -33,24 +33,28 @@ export default function ProductGrid() {
       currentProducts = currentProducts.filter(
         (product) => product.category === selectedCategory
       );
+      setCurrentPage(1);
     }
 
     if (minPrice !== null) {
       currentProducts = currentProducts.filter(
         (product) => product.price >= minPrice
       );
+      setCurrentPage(1);
     }
 
     if (maxPrice !== null) {
       currentProducts = currentProducts.filter(
         (products) => products.price <= maxPrice
       );
+      setCurrentPage(1);
     }
 
     if (searchProduct) {
       currentProducts = currentProducts.filter((product) =>
         product.title.toLowerCase().includes(searchProduct.toLowerCase())
       );
+      setCurrentPage(1);
     }
 
     if (sortOption) {
