@@ -3,12 +3,16 @@ import { Product, Category } from "../types";
 
 interface ProductResponse {
   products: Product[];
+  total: number;
 }
 
-export async function fetchProducts(): Promise<ProductResponse | undefined> {
+export async function fetchProducts(
+  skip: number,
+  limit: number = 20
+): Promise<ProductResponse | undefined> {
   try {
     const response: AxiosResponse<ProductResponse> = await axios.get(
-      "https://dummyjson.com/products"
+      `https://dummyjson.com/products?skip=${skip}&limit=${limit}`
     );
     return response.data;
   } catch (error) {

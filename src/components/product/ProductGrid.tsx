@@ -9,9 +9,11 @@ import { useProductContext } from "../../context/ProductContext";
 import Modal from "../reusable/Modal";
 import ProductDetails from "./ProductDetails";
 import Search from "../filter/Search";
+import Pagination from "../reusable/Pagination";
 
 export default function ProductGrid() {
-  const { products, loading } = useProductContext();
+  const { products, loading, totalProducts, currentPage, setCurrentPage } =
+    useProductContext();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>("");
@@ -20,6 +22,9 @@ export default function ProductGrid() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [searchProduct, setSearchProduct] = useState<string>("");
+
+  const productsPerPage = 20;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
 
   useEffect(() => {
     let currentProducts = [...products];
@@ -125,6 +130,11 @@ export default function ProductGrid() {
           />
         ))}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
       {selectedProduct && (
         <Modal
           title={selectedProduct.title}
