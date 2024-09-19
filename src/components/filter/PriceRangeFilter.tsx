@@ -38,7 +38,7 @@ export default function PriceRangeFilter({
         name="min-price"
         className="range-input"
         value={minPrice !== null ? minPrice : ""}
-        placeholder="min$"
+        placeholder="$"
         onChange={handleMinPriceChange}
       />
       <span> - </span>
@@ -48,7 +48,7 @@ export default function PriceRangeFilter({
         name="max-price"
         className="range-input"
         value={maxPrice !== null ? maxPrice : ""}
-        placeholder="max$"
+        placeholder="$"
         onChange={handleMaxPriceChange}
       />
     </div>
