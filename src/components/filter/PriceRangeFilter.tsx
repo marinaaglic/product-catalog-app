@@ -11,8 +11,8 @@ export default function PriceRangeFilter({
   onMinPriceChange,
   onMaxPriceChange,
 }: PriceRangeFilterProps) {
-  const [minPrice, setMinPrice] = useState<number | null>();
-  const [maxPrice, setMaxPrice] = useState<number | null>();
+  const [minPrice, setMinPrice] = useState<number | null>(null);
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
 
   const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value ? Number(e.target.value) : null;
@@ -38,17 +38,17 @@ export default function PriceRangeFilter({
         name="min-price"
         className="range-input"
         value={minPrice !== null ? minPrice : ""}
-        placeholder="$"
+        placeholder="min$"
         onChange={handleMinPriceChange}
       />
-      <span> TO </span>
+      <span> - </span>
       <Input
         type="number"
         id="max-price"
         name="max-price"
         className="range-input"
         value={maxPrice !== null ? maxPrice : ""}
-        placeholder="$"
+        placeholder="max$"
         onChange={handleMaxPriceChange}
       />
     </div>
