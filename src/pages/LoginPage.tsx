@@ -3,17 +3,18 @@ import Input from "../components/reusable/Input";
 import "../styles/_loginPage.scss";
 import { loginUser } from "../utils/api/api";
 import { LoginCredentials } from "../utils/types/user";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
+  const { setAuthenticated } = useAuth();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.preventDefault();
     const credentials: LoginCredentials = { username, password };
-    const authResponse = await loginUser(credentials, setAuthenticated);
+    await loginUser(credentials, setAuthenticated);
   };
 
   return (
