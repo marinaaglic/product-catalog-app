@@ -52,9 +52,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (productId: number) => {
-    setCartItems((prevItems) => {
-      return prevItems.filter((item) => item.id !== productId);
-    });
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
   };
 
   return (
