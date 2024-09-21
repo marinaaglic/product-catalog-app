@@ -6,6 +6,9 @@ import CategoryFilter from "../components/filter/CategoryFilter";
 import Sort from "../components/sort/Sort";
 import PriceRangeFilter from "../components/filter/PriceRangeFilter";
 import Pagination from "../components/reusable/Pagination";
+import { FaShoppingCart } from "react-icons/fa";
+import Modal from "../components/reusable/Modal";
+import CartItems from "../components/cart/CartItems";
 
 export default function ProductPage() {
   const { products, loading, totalProducts, currentPage, setCurrentPage } =
@@ -15,6 +18,7 @@ export default function ProductPage() {
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [searchProduct, setSearchProduct] = useState<string>("");
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const productsPerPage = 20;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -79,6 +83,10 @@ export default function ProductPage() {
           onMinPriceChange={setMinPrice}
           onMaxPriceChange={setMaxPrice}
         />
+        <FaShoppingCart
+          onClick={() => setOpenModal(true)}
+          className="cart-icon"
+        />
       </div>
       <ProductGrid products={paginatedProducts()} />
       <Pagination
@@ -86,6 +94,16 @@ export default function ProductPage() {
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
+      {openModal && (
+        <Modal
+          title="Your cart"
+          buttonText="OK"
+          onClose={() => setOpenModal(false)}
+          open={openModal}
+        >
+          <CartItems />
+        </Modal>
+      )}
     </div>
   );
 }
