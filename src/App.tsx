@@ -1,5 +1,5 @@
 import "./App.css";
-import ProductPage from "./pages";
+import ProductPage from "./pages/ProductPage";
 import { ProductProvider } from "./context/ProductContext";
 
 function App() {
