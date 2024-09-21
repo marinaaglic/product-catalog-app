@@ -18,6 +18,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
     setModalOpen(false);
     setSelectedProduct(null);
   };
+  const handleAddToCart = () => {};
   return (
     <div>
       <div className="grid-product">
@@ -26,6 +27,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             key={product.id}
             product={product}
             onShowDetails={() => openModal(product)}
+            onAddToCart={handleAddToCart}
           />
         ))}
       </div>
