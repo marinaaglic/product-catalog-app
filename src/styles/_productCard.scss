@@ -28,6 +28,18 @@
   cursor: pointer;
 }
 
+.btn-add-to-cart {
+  font-family: "Roboto", sans-serif;
+  background-color: $madder;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  border: 0;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 .modal-text a {
   color: $madder;
 }
