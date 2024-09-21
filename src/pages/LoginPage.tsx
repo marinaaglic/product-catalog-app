@@ -1,12 +1,38 @@
+import { useState } from "react";
 import Input from "../components/reusable/Input";
 import "../styles/_loginPage.scss";
+import { loginUser } from "../utils/api/api";
+import { LoginCredentials } from "../utils/types/user";
 
 export default function LoginPage() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.preventDefault();
+    const credentials: LoginCredentials = { username, password };
+    const authResponse = await loginUser(credentials, setAuthenticated);
+  };
+
   return (
     <div className="form-wrapper">
-      <form>
-        <Input label="Username" id="username" className="login-input" />
-        <Input label="Password" id="password" className="login-input" />
+      <form onSubmit={handleLogin}>
+        <Input
+          label="Username"
+          id="username"
+          type="text"
+          className="login-input"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          label="Password"
+          id="password"
+          type="password"
+          className="login-input"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit" className="btn-login">
           Login
         </button>
