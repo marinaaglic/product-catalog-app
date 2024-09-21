@@ -1,12 +1,15 @@
 import "./App.css";
-import ProductPage from "./pages";
+import AppRoutes from "./routes/AppRoutes";
 import { ProductProvider } from "./context/ProductContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <ProductProvider>
-      <ProductPage />
-    </ProductProvider>
+    <AuthProvider>
+      <ProductProvider>
+        <AppRoutes />
+      </ProductProvider>
+    </AuthProvider>
   );
 }
 

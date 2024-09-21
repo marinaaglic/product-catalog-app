@@ -1,0 +1,30 @@
+@import "_colors";
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 100px;
+}
+
+.login-input {
+  font-size: 15px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: "Roboto", sans-serif;
+}
+
+.btn-login {
+  display: inline-block;
+  background-color: $madder;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 20px;
+}

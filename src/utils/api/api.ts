@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Product, Category } from "../types";
+import { AuthResponse, LoginCredentials } from "../types/user";
 
 interface ProductResponse {
   products: Product[];
@@ -28,5 +29,24 @@ export async function fetchCategories(): Promise<Category[] | undefined> {
     return response.data;
   } catch (error) {
     console.log("Error fetching data: ", error);
+  }
+}
+
+export async function loginUser(
+  credentials: LoginCredentials,
+  setAuthenticated: (value: boolean) => void
+) {
+  try {
+    const response: AxiosResponse<AuthResponse> = await axios.post(
+      "https://dummyjson.com/auth/login",
+      credentials
+    );
+    const { accessToken } = response.data;
+    localStorage.setItem("token", accessToken);
+    setAuthenticated(true);
+    console.log("Login successful. Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("An error occurred.", error);
   }
 }
