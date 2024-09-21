@@ -1,11 +1,11 @@
 import "./App.css";
-import ProductPage from "./pages/ProductPage";
+import AppRoutes from "./routes/AppRoutes";
 import { ProductProvider } from "./context/ProductContext";
 
 function App() {
   return (
     <ProductProvider>
-      <ProductPage />
+      <AppRoutes />
     </ProductProvider>
   );
 }
