@@ -16,9 +16,13 @@ export default function LoginPage() {
     event.preventDefault();
     event.preventDefault();
     const credentials: LoginCredentials = { username, password };
-    await loginUser(credentials, setAuthenticated);
-    alert("You have succefully logged in!");
-    navigate("/");
+    try {
+      await loginUser(credentials, setAuthenticated);
+      alert("You have succefully logged in!");
+      navigate("/");
+    } catch (error) {
+      alert("Username or password incorrect.");
+    }
   };
 
   return (

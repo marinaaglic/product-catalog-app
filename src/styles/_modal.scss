@@ -15,6 +15,8 @@
   overflow-y: auto;
 
   .modal-main {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     border-radius: 10px;
     padding: 20px;
@@ -47,6 +49,8 @@
       text-align: center;
       cursor: pointer;
       margin-top: 20px;
+      width: auto;
+      align-self: center;
     }
   }
 }
