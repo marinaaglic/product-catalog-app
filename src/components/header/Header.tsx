@@ -38,15 +38,19 @@ export default function Header({
         />
       </div>
       <div className="button-div">
+        {isAuthenticated ? (
+          <button onClick={logout} className="btn-logout">
+            Logout
+          </button>
+        ) : (
+          <a href="/login" className="login-link">
+            Login
+          </a>
+        )}
         <FaShoppingCart
           onClick={() => setOpenModal(true)}
           className="cart-icon"
         />
-        {isAuthenticated && (
-          <button onClick={logout} className="btn-logout">
-            Logout{" "}
-          </button>
-        )}
       </div>
     </div>
   );

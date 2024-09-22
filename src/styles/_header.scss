@@ -34,8 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
-
+  gap: 20px;
   @media (max-width: 768px) {
     justify-content: flex-end;
     margin-top: 10px;
@@ -57,4 +56,9 @@
   @media (max-width: 768px) {
     margin-top: 10px;
   }
+}
+
+.login-link {
+  font-family: "Roboto", sans-serif;
+  color: $chocolate-cosmos;
 }
