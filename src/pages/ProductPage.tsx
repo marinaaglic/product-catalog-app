@@ -1,15 +1,11 @@
 import { useState } from "react";
 import ProductGrid from "../components/product/ProductGrid";
 import { useProductContext } from "../context/ProductContext";
-import Search from "../components/filter/Search";
-import CategoryFilter from "../components/filter/CategoryFilter";
-import Sort from "../components/sort/Sort";
-import PriceRangeFilter from "../components/filter/PriceRangeFilter";
 import Pagination from "../components/reusable/Pagination";
-import { FaShoppingCart } from "react-icons/fa";
 import Modal from "../components/reusable/Modal";
 import CartItems from "../components/cart/CartItems";
 import { useAuth } from "../context/AuthContext";
+import Header from "../components/header/Header";
 
 export default function ProductPage() {
   const { products, loading, totalProducts, currentPage, setCurrentPage } =
@@ -77,25 +73,17 @@ export default function ProductPage() {
   }
   return (
     <div>
-      <div className="div-filter-sort">
-        <Search onSearchProduct={setSearchProduct} />
-        <CategoryFilter onCategoryChange={setSelectedCategory} />
-        <Sort onSortingOptionChange={setSortOption} />
-        <PriceRangeFilter
-          onMinPriceChange={setMinPrice}
-          onMaxPriceChange={setMaxPrice}
-        />
-        <FaShoppingCart
-          onClick={() => setOpenModal(true)}
-          className="cart-icon"
-        />
+      <Header
+        setSearchProduct={setSearchProduct}
+        setSelectedCategory={setSelectedCategory}
+        setSortOption={setSortOption}
+        setMinPrice={setMinPrice}
+        setMaxPrice={setMaxPrice}
+        setOpenModal={setOpenModal}
+        logout={logout}
+        isAuthenticated={isAuthenticated}
+      />
 
-        {isAuthenticated && (
-          <button onClick={logout} className="btn-logout">
-            Logout{" "}
-          </button>
-        )}
-      </div>
       <ProductGrid products={paginatedProducts()} />
       <Pagination
         currentPage={currentPage}

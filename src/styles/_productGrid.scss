@@ -19,19 +19,6 @@
   }
 }
 
-.div-filter-sort {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  margin-top: 20px;
-
-  @media (max-width: 658px) {
-    flex-direction: column;
-  }
-}
-
 .product-details {
   img {
     width: 200px;
