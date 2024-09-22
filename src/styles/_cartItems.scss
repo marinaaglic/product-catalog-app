@@ -1,0 +1,16 @@
+@import "_colors.scss";
+
+.items-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.delete-icon {
+  color: $burgundy;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}

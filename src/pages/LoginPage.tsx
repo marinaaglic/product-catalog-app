@@ -4,31 +4,36 @@ import "../styles/_loginPage.scss";
 import { loginUser } from "../utils/api/api";
 import { LoginCredentials } from "../utils/types/user";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { setAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.preventDefault();
     const credentials: LoginCredentials = { username, password };
     await loginUser(credentials, setAuthenticated);
+    alert("You have succefully logged in!");
+    navigate("/");
   };
 
   return (
     <div className="form-wrapper">
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className="login-form">
+        <h2>Login form</h2>
         <Input
-          label="Username"
+          label="Username:"
           id="username"
           type="text"
           className="login-input"
           onChange={(e) => setUsername(e.target.value)}
-        />
+        />{" "}
         <Input
-          label="Password"
+          label="Password:"
           id="password"
           type="password"
           className="login-input"

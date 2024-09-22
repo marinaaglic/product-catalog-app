@@ -6,35 +6,66 @@ import {
   useEffect,
 } from "react";
 
-type AuthContextType = {
+import { Product } from "../utils/types";
+
+type AuthType = {
   isAuthenticated: boolean;
-  checkToken: (token: string) => void;
   setAuthenticated: (value: boolean) => void;
 };
+
+type CartType = {
+  cartItems: Product[];
+  addToCart: (product: Product) => void;
+  removeFromCart: (productId: number) => void;
+};
+
+type AuthContextType = AuthType & CartType;
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
+
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
   }, []);
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
 
   const setAuthenticated = (value: boolean) => {
     setIsAuthenticated(value);
   };
 
-  const checkToken = (token: string) => {
-    localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
+  const addToCart = (product: Product) => {
+    setCartItems((prevItems) => [...prevItems, product]);
   };
+
+  const removeFromCart = (productId: number) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
+  };
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, checkToken, setAuthenticated }}
+      value={{
+        isAuthenticated,
+        setAuthenticated,
+        cartItems,
+        addToCart,
+        removeFromCart,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -15,13 +15,14 @@ export default function ProductCard({
   onShowDetails,
   onAddToCart,
 }: ProductCardProps) {
+  const { isAuthenticated, addToCart } = useAuth();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const { isAuthenticated } = useAuth();
   const handleAddToCart = () => {
     if (!isAuthenticated) {
       setModalOpen(true);
     } else {
+      addToCart(product);
       onAddToCart();
     }
   };
