@@ -7,7 +7,7 @@ import { useState } from "react";
 interface ProductCardProps {
   product: Product;
   onShowDetails: () => void;
-  onAddToCart: () => void;
+  onAddToCart: (product: Product) => void;
 }
 
 export default function ProductCard({
@@ -15,15 +15,14 @@ export default function ProductCard({
   onShowDetails,
   onAddToCart,
 }: ProductCardProps) {
-  const { isAuthenticated, addToCart } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
       setModalOpen(true);
     } else {
-      addToCart(product);
-      onAddToCart();
+      onAddToCart(product);
     }
   };
   const closeModal = () => {

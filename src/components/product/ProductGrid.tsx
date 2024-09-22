@@ -4,10 +4,12 @@ import { Product } from "../../utils/types";
 import "../../styles/_productGrid.scss";
 import Modal from "../reusable/Modal";
 import ProductDetails from "./ProductDetails";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ProductGrid({ products }: { products: Product[] }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { addToCart } = useAuth();
 
   const openModal = (product: Product) => {
     setSelectedProduct(product);
@@ -18,7 +20,10 @@ export default function ProductGrid({ products }: { products: Product[] }) {
     setModalOpen(false);
     setSelectedProduct(null);
   };
-  const handleAddToCart = () => {};
+  const handleAddToCart = (product: Product) => {
+    addToCart(product);
+    alert("Product is added to your cart!");
+  };
   return (
     <div>
       <div className="grid-product">
