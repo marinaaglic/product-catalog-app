@@ -4,7 +4,7 @@ import { useProductContext } from "../context/ProductContext";
 import Pagination from "../components/reusable/Pagination";
 import Modal from "../components/reusable/Modal";
 import CartItems from "../components/cart/CartItems";
-import { useAuth } from "../context/AuthContext";
+import { useUserContext } from "../context/UserContext";
 import Header from "../components/header/Header";
 
 export default function ProductPage() {
@@ -16,7 +16,7 @@ export default function ProductPage() {
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [searchProduct, setSearchProduct] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const { logout, isAuthenticated } = useAuth();
+  const { logout, isAuthenticated } = useUserContext();
 
   const productsPerPage = 20;
   const totalPages = Math.ceil(totalProducts / productsPerPage);

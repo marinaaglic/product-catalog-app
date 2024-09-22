@@ -1,6 +1,6 @@
 import { Product } from "../../utils/types/product";
 import "../../styles/_productCard.scss";
-import { useAuth } from "../../context/AuthContext";
+import { useUserContext } from "../../context/UserContext";
 import Modal from "../reusable/Modal";
 import { useState } from "react";
 import Button from "../reusable/Button";
@@ -16,7 +16,7 @@ export default function ProductCard({
   onShowDetails,
   onAddToCart,
 }: ProductCardProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useUserContext();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleAddToCart = () => {

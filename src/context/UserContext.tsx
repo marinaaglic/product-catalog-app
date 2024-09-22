@@ -20,9 +20,9 @@ type CartType = {
   removeFromCart: (productId: number) => void;
 };
 
-type AuthContextType = AuthType & CartType;
+type UserContextType = AuthType & CartType;
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider
+    <UserContext.Provider
       value={{
         isAuthenticated,
         setAuthenticated,
@@ -96,12 +96,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </UserContext.Provider>
   );
 };
 
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
+export const useUserContext = (): UserContextType => {
+  const context = useContext(UserContext);
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }

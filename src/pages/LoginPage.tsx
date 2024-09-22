@@ -3,14 +3,14 @@ import Input from "../components/reusable/Input";
 import "../styles/_loginPage.scss";
 import { loginUser } from "../utils/api/api";
 import { LoginCredentials } from "../utils/types/user";
-import { useAuth } from "../context/AuthContext";
+import { useUserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/reusable/Button";
 
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { setAuthenticated } = useAuth();
+  const { setAuthenticated } = useUserContext();
   const navigate = useNavigate();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
