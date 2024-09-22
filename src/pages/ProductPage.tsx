@@ -9,6 +9,7 @@ import Pagination from "../components/reusable/Pagination";
 import { FaShoppingCart } from "react-icons/fa";
 import Modal from "../components/reusable/Modal";
 import CartItems from "../components/cart/CartItems";
+import { useAuth } from "../context/AuthContext";
 
 export default function ProductPage() {
   const { products, loading, totalProducts, currentPage, setCurrentPage } =
@@ -19,6 +20,7 @@ export default function ProductPage() {
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [searchProduct, setSearchProduct] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const { logout } = useAuth();
 
   const productsPerPage = 20;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -87,6 +89,9 @@ export default function ProductPage() {
           onClick={() => setOpenModal(true)}
           className="cart-icon"
         />
+        <button onClick={logout} className="btn-logout">
+          Logout{" "}
+        </button>
       </div>
       <ProductGrid products={paginatedProducts()} />
       <Pagination

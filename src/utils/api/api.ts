@@ -41,10 +41,10 @@ export async function loginUser(
       "https://dummyjson.com/auth/login",
       credentials
     );
-    const { accessToken } = response.data;
+    const { accessToken, id } = response.data;
     localStorage.setItem("token", accessToken);
+    localStorage.setItem("userId", id.toString());
     setAuthenticated(true);
-    console.log("Login successful. Response:", response.data);
     return response.data;
   } catch (error) {
     console.log("An error occurred.", error);

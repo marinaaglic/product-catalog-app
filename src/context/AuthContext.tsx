@@ -11,6 +11,7 @@ import { Product } from "../utils/types";
 type AuthType = {
   isAuthenticated: boolean;
   setAuthenticated: (value: boolean) => void;
+  logout: () => void;
 };
 
 type CartType = {
@@ -25,27 +26,40 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [cartItems, setCartItems] = useState<Product[]>(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
+    const savedToken = localStorage.getItem("token");
+    const storedUserId = localStorage.getItem("userId");
 
-    const storedCartItems = localStorage.getItem("cart");
-    if (storedCartItems) {
-      setCartItems(JSON.parse(storedCartItems));
+    if (savedToken) {
+      setIsAuthenticated(true);
+
+      if (storedUserId) {
+        const userCart = localStorage.getItem(`cart_${storedUserId}`);
+        if (userCart) {
+          setCartItems(JSON.parse(userCart));
+        }
+      }
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      localStorage.setItem(`cart_${storedUserId}`, JSON.stringify(cartItems));
+    }
   }, [cartItems]);
 
   const setAuthenticated = (value: boolean) => {
     setIsAuthenticated(value);
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      const userCart = localStorage.getItem(`cart_${storedUserId}`);
+      if (userCart) {
+        setCartItems(JSON.parse(userCart));
+      }
+    }
   };
 
   const addToCart = (product: Product) => {
@@ -59,6 +73,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const logout = () => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      localStorage.setItem(`cart_${storedUserId}`, JSON.stringify(cartItems));
+    }
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    setIsAuthenticated(false);
+    setCartItems([]);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -67,6 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         cartItems,
         addToCart,
         removeFromCart,
+        logout,
       }}
     >
       {children}
