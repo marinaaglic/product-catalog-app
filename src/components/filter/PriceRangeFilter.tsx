@@ -3,8 +3,8 @@ import Input from "../reusable/Input";
 import "../../styles/_priceRangeFilter.scss";
 
 interface PriceRangeFilterProps {
-  onMinPriceChange: (price: number) => void;
-  onMaxPriceChange: (price: number) => void;
+  onMinPriceChange: (price: number | null) => void;
+  onMaxPriceChange: (price: number | null) => void;
 }
 
 export default function PriceRangeFilter({
@@ -17,17 +17,13 @@ export default function PriceRangeFilter({
   const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value ? Number(e.target.value) : null;
     setMinPrice(value);
-    if (value !== null) {
-      onMinPriceChange(value);
-    }
+    onMinPriceChange(value);
   };
 
   const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value ? Number(e.target.value) : null;
     setMaxPrice(value);
-    if (value !== null) {
-      onMaxPriceChange(value);
-    }
+    onMaxPriceChange(value);
   };
 
   return (
