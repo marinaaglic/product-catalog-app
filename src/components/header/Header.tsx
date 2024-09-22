@@ -3,6 +3,7 @@ import Search from "../filterAndSort/Search";
 import CategoryFilter from "../filterAndSort/CategoryFilter";
 import Sort from "../filterAndSort/Sort";
 import PriceRangeFilter from "../filterAndSort/PriceRangeFilter";
+import "../../styles/_header.scss";
 
 interface HeaderProps {
   setSearchProduct: (search: string) => void;
@@ -26,23 +27,27 @@ export default function Header({
   isAuthenticated,
 }: HeaderProps) {
   return (
-    <div className="div-filter-sort">
-      <Search onSearchProduct={setSearchProduct} />
-      <CategoryFilter onCategoryChange={setSelectedCategory} />
-      <Sort onSortingOptionChange={setSortOption} />
-      <PriceRangeFilter
-        onMinPriceChange={setMinPrice}
-        onMaxPriceChange={setMaxPrice}
-      />
-      <FaShoppingCart
-        onClick={() => setOpenModal(true)}
-        className="cart-icon"
-      />
-      {isAuthenticated && (
-        <button onClick={logout} className="btn-logout">
-          Logout{" "}
-        </button>
-      )}
+    <div className="header-wrapper">
+      <div className="filter-sort-div">
+        <Search onSearchProduct={setSearchProduct} />
+        <CategoryFilter onCategoryChange={setSelectedCategory} />
+        <Sort onSortingOptionChange={setSortOption} />
+        <PriceRangeFilter
+          onMinPriceChange={setMinPrice}
+          onMaxPriceChange={setMaxPrice}
+        />
+      </div>
+      <div className="button-div">
+        <FaShoppingCart
+          onClick={() => setOpenModal(true)}
+          className="cart-icon"
+        />
+        {isAuthenticated && (
+          <button onClick={logout} className="btn-logout">
+            Logout{" "}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

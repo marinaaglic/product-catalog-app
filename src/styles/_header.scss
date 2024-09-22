@@ -1,0 +1,60 @@
+@import "_colors.scss";
+
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.filter-sort-div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 5px;
+    width: 50%;
+  }
+}
+
+.button-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+
+  @media (max-width: 768px) {
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+}
+
+.cart-icon {
+  cursor: pointer;
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.btn-logout {
+  margin-left: 10px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
+}
