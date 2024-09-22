@@ -5,6 +5,7 @@ import { loginUser } from "../utils/api/api";
 import { LoginCredentials } from "../utils/types/user";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/reusable/Button";
 
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
@@ -43,9 +44,9 @@ export default function LoginPage() {
           className="login-input"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className="btn-login">
+        <Button type="submit" className="btn-login">
           Login
-        </button>
+        </Button>
       </form>
     </div>
   );

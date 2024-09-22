@@ -4,6 +4,7 @@ import CategoryFilter from "../filterAndSort/CategoryFilter";
 import Sort from "../filterAndSort/Sort";
 import PriceRangeFilter from "../filterAndSort/PriceRangeFilter";
 import "../../styles/_header.scss";
+import Button from "../reusable/Button";
 
 interface HeaderProps {
   setSearchProduct: (search: string) => void;
@@ -39,9 +40,9 @@ export default function Header({
       </div>
       <div className="button-div">
         {isAuthenticated ? (
-          <button onClick={logout} className="btn-logout">
+          <Button onClick={logout} className="btn-logout">
             Logout
-          </button>
+          </Button>
         ) : (
           <a href="/login" className="login-link">
             Login

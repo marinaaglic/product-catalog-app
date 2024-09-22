@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ProductCard from "./ProductCard";
-import { Product } from "../../utils/types";
+import { Product } from "../../utils/types/product";
 import "../../styles/_productGrid.scss";
 import Modal from "../reusable/Modal";
 import ProductDetails from "./ProductDetails";

@@ -6,7 +6,7 @@ import {
   useEffect,
 } from "react";
 
-import { Product } from "../utils/types";
+import { Product } from "../utils/types/product";
 
 type AuthType = {
   isAuthenticated: boolean;

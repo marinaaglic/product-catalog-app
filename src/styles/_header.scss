@@ -53,14 +53,18 @@
 }
 
 .btn-logout {
-  margin-left: 10px;
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-  }
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  font-family: "Roboto", sans-serif;
+  color: $chocolate-cosmos;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 15px;
 }
 
 .login-link {
   font-family: "Roboto", sans-serif;
   color: $chocolate-cosmos;
+  font-size: 15px;
 }

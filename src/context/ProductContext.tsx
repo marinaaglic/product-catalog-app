@@ -6,7 +6,7 @@ import {
   useContext,
 } from "react";
 import { fetchProducts } from "../utils/api/api";
-import { Product } from "../utils/types";
+import { Product } from "../utils/types/product";
 
 type ProductContextType = {
   products: Product[];
