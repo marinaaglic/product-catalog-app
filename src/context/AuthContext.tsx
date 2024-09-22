@@ -25,22 +25,23 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [cartItems, setCartItems] = useState<Product[]>(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
 
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
+    const storedCartItems = localStorage.getItem("cart");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
     }
   }, []);
 
   useEffect(() => {
-    if (cartItems.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-    }
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   const setAuthenticated = (value: boolean) => {
@@ -52,9 +53,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (productId: number) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== productId)
-    );
+    const isItemInCart = cartItems.find((item) => item.id === productId);
+    if (isItemInCart) {
+      setCartItems(cartItems.filter((item) => item.id !== productId));
+    }
   };
 
   return (
