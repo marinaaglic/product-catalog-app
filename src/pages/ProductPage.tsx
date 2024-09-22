@@ -20,7 +20,7 @@ export default function ProductPage() {
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [searchProduct, setSearchProduct] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const { logout } = useAuth();
+  const { logout, isAuthenticated } = useAuth();
 
   const productsPerPage = 20;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -89,9 +89,12 @@ export default function ProductPage() {
           onClick={() => setOpenModal(true)}
           className="cart-icon"
         />
-        <button onClick={logout} className="btn-logout">
-          Logout{" "}
-        </button>
+
+        {isAuthenticated && (
+          <button onClick={logout} className="btn-logout">
+            Logout{" "}
+          </button>
+        )}
       </div>
       <ProductGrid products={paginatedProducts()} />
       <Pagination
