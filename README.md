@@ -1,5 +1,8 @@
 # Product Display App
 
+
+## Overview
+
 A React & TypeScript application that displays products in a grid with sorting, filtering, and pagination features. Includes user authentication and basic cart functionality.
 
 ## Features
@@ -26,3 +29,16 @@ A React & TypeScript application that displays products in a grid with sorting, 
 - **Categories**: `https://dummyjson.com/products/categories`
 - **Users**: `https://dummyjson.com/users`
 - **Authentication**: `https://dummyjson.com/docs/auth`
+
+## Deployment
+
+The application is deployed on Netlify.
+See application [here](https://bright-sfogliatella-3056f6.netlify.app/).
+
+## Setup
+
+1. Clone the repository.
+2. Install the dependencies using `npm install`.
+3. Start the backend server using `npm run dev`.
+4. Start the frontend using `npm run dev`.
+5. Visit `localhost:5173` in your browser to view the application.
