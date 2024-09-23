@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../../utils/api/api";
-import { Category } from "../../utils/types";
+import { Category } from "../../utils/types/product";
 import "../../styles/_filter.scss";
 
-interface FilterProps {
+interface CategoryFilterProps {
   onCategoryChange: (category: string) => void;
 }
 
-export default function Filter({ onCategoryChange }: FilterProps) {
+export default function CategoryFilter({
+  onCategoryChange,
+}: CategoryFilterProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>();
   useEffect(() => {

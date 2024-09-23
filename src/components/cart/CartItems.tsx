@@ -1,9 +1,9 @@
-import { useAuth } from "../../context/AuthContext";
+import { useUserContext } from "../../context/UserContext";
 import { FaTrashAlt } from "react-icons/fa";
 import "../../styles/_cartItems.scss";
 
 export default function CartItems() {
-  const { cartItems, removeFromCart } = useAuth();
+  const { cartItems, removeFromCart } = useUserContext();
 
   return (
     <div className="cart-wrapper">

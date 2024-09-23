@@ -1,18 +1,14 @@
 import { useState } from "react";
 import ProductGrid from "../components/product/ProductGrid";
 import { useProductContext } from "../context/ProductContext";
-import Search from "../components/filter/Search";
-import CategoryFilter from "../components/filter/CategoryFilter";
-import Sort from "../components/sort/Sort";
-import PriceRangeFilter from "../components/filter/PriceRangeFilter";
 import Pagination from "../components/reusable/Pagination";
-import { FaShoppingCart } from "react-icons/fa";
 import Modal from "../components/reusable/Modal";
 import CartItems from "../components/cart/CartItems";
-import { useAuth } from "../context/AuthContext";
+import { useUserContext } from "../context/UserContext";
+import Header from "../components/header/Header";
 
 export default function ProductPage() {
-  const { products, loading, totalProducts, currentPage, setCurrentPage } =
+  const { products, loading, currentPage, setCurrentPage } =
     useProductContext();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [sortOption, setSortOption] = useState<string>("");
@@ -20,10 +16,7 @@ export default function ProductPage() {
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [searchProduct, setSearchProduct] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const { logout, isAuthenticated } = useAuth();
-
-  const productsPerPage = 20;
-  const totalPages = Math.ceil(totalProducts / productsPerPage);
+  const { logout, isAuthenticated } = useUserContext();
 
   const filterAndSortProducts = () => {
     let currentProducts = [...products];
@@ -64,8 +57,10 @@ export default function ProductPage() {
 
     return currentProducts;
   };
+  const filteredProducts = filterAndSortProducts();
+  const productsPerPage = 20;
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const paginatedProducts = () => {
-    const filteredProducts = filterAndSortProducts();
     return filteredProducts.slice(
       (currentPage - 1) * productsPerPage,
       currentPage * productsPerPage
@@ -77,25 +72,17 @@ export default function ProductPage() {
   }
   return (
     <div>
-      <div className="div-filter-sort">
-        <Search onSearchProduct={setSearchProduct} />
-        <CategoryFilter onCategoryChange={setSelectedCategory} />
-        <Sort onSortingOptionChange={setSortOption} />
-        <PriceRangeFilter
-          onMinPriceChange={setMinPrice}
-          onMaxPriceChange={setMaxPrice}
-        />
-        <FaShoppingCart
-          onClick={() => setOpenModal(true)}
-          className="cart-icon"
-        />
+      <Header
+        setSearchProduct={setSearchProduct}
+        setSelectedCategory={setSelectedCategory}
+        setSortOption={setSortOption}
+        setMinPrice={setMinPrice}
+        setMaxPrice={setMaxPrice}
+        setOpenModal={setOpenModal}
+        logout={logout}
+        isAuthenticated={isAuthenticated}
+      />
 
-        {isAuthenticated && (
-          <button onClick={logout} className="btn-logout">
-            Logout{" "}
-          </button>
-        )}
-      </div>
       <ProductGrid products={paginatedProducts()} />
       <Pagination
         currentPage={currentPage}

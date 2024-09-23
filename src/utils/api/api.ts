@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Product, Category } from "../types";
+import { Product, Category } from "../types/product";
 import { AuthResponse, LoginCredentials } from "../types/user";
 
 interface ProductResponse {

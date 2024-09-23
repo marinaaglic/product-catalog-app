@@ -1,0 +1,70 @@
+@import "_colors.scss";
+
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.filter-sort-div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 5px;
+    width: 50%;
+  }
+}
+
+.button-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 20px;
+  }
+}
+
+.cart-icon {
+  cursor: pointer;
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.btn-logout {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  font-family: "Roboto", sans-serif;
+  color: $chocolate-cosmos;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.login-link {
+  font-family: "Roboto", sans-serif;
+  color: $chocolate-cosmos;
+  font-size: 15px;
+}

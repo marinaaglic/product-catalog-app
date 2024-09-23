@@ -1,4 +1,5 @@
 import "../../styles/_pagination.scss";
+import Button from "./Button";
 
 interface PaginationProps {
   currentPage: number;
@@ -13,23 +14,23 @@ export default function Pagination({
 }: PaginationProps) {
   return (
     <div className="pagination-wrapper">
-      <button
+      <Button
         className="pagination-btn"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
         Previous
-      </button>
+      </Button>
       <span className="pagination-page-info">
         Page {currentPage} of {totalPages}
       </span>
-      <button
+      <Button
         className="pagination-btn"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }

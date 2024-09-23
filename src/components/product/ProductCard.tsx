@@ -1,8 +1,9 @@
-import { Product } from "../../utils/types";
+import { Product } from "../../utils/types/product";
 import "../../styles/_productCard.scss";
-import { useAuth } from "../../context/AuthContext";
+import { useUserContext } from "../../context/UserContext";
 import Modal from "../reusable/Modal";
 import { useState } from "react";
+import Button from "../reusable/Button";
 
 interface ProductCardProps {
   product: Product;
@@ -15,7 +16,7 @@ export default function ProductCard({
   onShowDetails,
   onAddToCart,
 }: ProductCardProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useUserContext();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleAddToCart = () => {
@@ -38,13 +39,13 @@ export default function ProductCard({
       <h2>{product.title}</h2>
       <p>{truncatedDescription}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
-      <button className="btn-show-details" onClick={onShowDetails}>
+      <Button className="btn-show-details" onClick={onShowDetails}>
         {" "}
         Show details
-      </button>
-      <button className="btn-add-to-cart" onClick={handleAddToCart}>
+      </Button>
+      <Button className="btn-add-to-cart" onClick={handleAddToCart}>
         Add to cart
-      </button>
+      </Button>
       {modalOpen && (
         <Modal
           title="Login Required"
