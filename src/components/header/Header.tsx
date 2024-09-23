@@ -5,6 +5,7 @@ import Sort from "../filterAndSort/Sort";
 import PriceRangeFilter from "../filterAndSort/PriceRangeFilter";
 import "../../styles/_header.scss";
 import Button from "../reusable/Button";
+import { useState } from "react";
 
 interface HeaderProps {
   setSearchProduct: (search: string) => void;
@@ -27,9 +28,16 @@ export default function Header({
   logout,
   isAuthenticated,
 }: HeaderProps) {
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
   return (
     <div className="header-wrapper">
-      <div className="filter-sort-div">
+      <button className="btn-filter" onClick={toggleFilters}>
+        Filters
+      </button>
+      <div className={`filter-sort-div ${showFilters ? "open" : "closed"}`}>
         <Search onSearchProduct={setSearchProduct} />
         <CategoryFilter onCategoryChange={setSelectedCategory} />
         <Sort onSortingOptionChange={setSortOption} />

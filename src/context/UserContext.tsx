@@ -18,6 +18,8 @@ type CartType = {
   cartItems: Product[];
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
+  getTotalItems: () => number;
+  getTotalAmount: () => number;
 };
 
 type UserContextType = AuthType & CartType;
@@ -63,7 +65,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const addToCart = (product: Product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+    setCartItems((prevItems) => {
+      const existingItemIndex = prevItems.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingItemIndex !== -1) {
+        const updatedItems = [...prevItems];
+        updatedItems[existingItemIndex] = {
+          ...updatedItems[existingItemIndex],
+          quantity: (updatedItems[existingItemIndex].quantity || 1) + 1,
+        };
+        return updatedItems;
+      } else {
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
   };
 
   const removeFromCart = (productId: number) => {
@@ -84,6 +101,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setCartItems([]);
   };
 
+  const getTotalItems = () => {
+    return cartItems.length;
+  };
+
+  const getTotalAmount = () => {
+    return cartItems.reduce((total, item) => {
+      const quantity = item.quantity || 1;
+      return total + item.price * quantity;
+    }, 0);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -93,6 +121,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         addToCart,
         removeFromCart,
         logout,
+        getTotalItems,
+        getTotalAmount,
       }}
     >
       {children}
