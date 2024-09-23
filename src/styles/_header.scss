@@ -23,6 +23,7 @@
     gap: 5px;
     order: 2;
     margin-top: 10px;
+    justify-content: space-between;
   }
 
   @media (max-width: 585px) {
@@ -78,19 +79,20 @@
 
 @media (max-width: 585px) {
   .btn-filter {
-    display: block;
+    display: inline-flex;
     font-family: "Roboto", sans-serif;
     background-color: $madder;
     color: white;
-    padding: 5px 10px;
+    padding: 10px 20px;
     border-radius: 8px;
     font-family: "Poppins", sans-serif;
     border: 0;
-    font-size: 13px;
+    font-size: 15px;
     cursor: pointer;
     margin-bottom: 10px;
     margin-top: 10px;
     order: 2;
+    width: fit-content;
   }
 
   .filter-sort-div.closed {
