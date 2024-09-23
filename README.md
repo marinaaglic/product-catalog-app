@@ -1,50 +1,28 @@
-# React + TypeScript + Vite
+# Product Display App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React & TypeScript application that displays products in a grid with sorting, filtering, and pagination features. Includes user authentication and basic cart functionality.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Product Grid**: Displays product image, name, price, and a short description (up to 100 characters).
+- **Modal View**: View detailed product information in a modal on clicking the details button.
+- **Filtering**: Filter products by category and predefined price ranges.
+- **Sorting**: Sort products by price (low-high, high-low) or name (alphabetical).
+- **Search**: Search products by name.
+- **Pagination**: Display 20 products per page with navigation.
+- **User Authentication**: Login/logout with token management.
+- **Cart Functionality**: Add products to cart, stored in localStorage for persistence.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** with **TypeScript**
+- **useContext** for global state (auth, cart)
+- **localStorage** for cart persistence
+- **Dummy API**: [https://dummyjson.com](https://dummyjson.com) for product and user data
 
-- Configure the top-level `parserOptions` property like this:
+## API Endpoints
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Products**: `https://dummyjson.com/products`
+- **Categories**: `https://dummyjson.com/products/categories`
+- **Users**: `https://dummyjson.com/users`
+- **Authentication**: `https://dummyjson.com/docs/auth`
