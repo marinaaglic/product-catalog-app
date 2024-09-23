@@ -8,7 +8,7 @@ import { useUserContext } from "../context/UserContext";
 import Header from "../components/header/Header";
 
 export default function ProductPage() {
-  const { products, loading, totalProducts, currentPage, setCurrentPage } =
+  const { products, loading, currentPage, setCurrentPage } =
     useProductContext();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [sortOption, setSortOption] = useState<string>("");
@@ -17,9 +17,6 @@ export default function ProductPage() {
   const [searchProduct, setSearchProduct] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { logout, isAuthenticated } = useUserContext();
-
-  const productsPerPage = 20;
-  const totalPages = Math.ceil(totalProducts / productsPerPage);
 
   const filterAndSortProducts = () => {
     let currentProducts = [...products];
@@ -60,8 +57,10 @@ export default function ProductPage() {
 
     return currentProducts;
   };
+  const filteredProducts = filterAndSortProducts();
+  const productsPerPage = 20;
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const paginatedProducts = () => {
-    const filteredProducts = filterAndSortProducts();
     return filteredProducts.slice(
       (currentPage - 1) * productsPerPage,
       currentPage * productsPerPage

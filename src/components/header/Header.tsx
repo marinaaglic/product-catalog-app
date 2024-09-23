@@ -29,7 +29,7 @@ export default function Header({
 }: HeaderProps) {
   return (
     <div className="header-wrapper">
-      <div className={"filter-sort-div"}>
+      <div className="filter-sort-div">
         <Search onSearchProduct={setSearchProduct} />
         <CategoryFilter onCategoryChange={setSelectedCategory} />
         <Sort onSortingOptionChange={setSortOption} />
