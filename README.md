@@ -37,8 +37,7 @@ See application [here](https://bright-sfogliatella-3056f6.netlify.app/).
 
 ## Setup
 
-1. Clone the repository.
+1. Clone the repository using `git clone <repository-url>`
 2. Install the dependencies using `npm install`.
-3. Start the backend server using `npm run dev`.
-4. Start the frontend using `npm run dev`.
+3. Start the application using `npm run dev`.
 5. Visit `localhost:5173` in your browser to view the application.
