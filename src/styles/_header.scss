@@ -19,10 +19,17 @@
   justify-content: center;
 
   @media (max-width: 768px) {
+    flex-direction: row;
+    gap: 5px;
+    order: 2;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 585px) {
     flex-direction: column;
     gap: 5px;
-    width: 50%;
     order: 2;
+    margin-top: 10px;
   }
 }
 
@@ -69,7 +76,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 585px) {
   .btn-filter {
     display: block;
     font-family: "Roboto", sans-serif;
