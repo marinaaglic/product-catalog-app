@@ -24,10 +24,14 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalProducts, setTotalProducts] = useState<number>(0);
 
+  const productsPerPage = 20;
+
   useEffect(() => {
     const loadProducts = async () => {
+      setLoading(true);
       try {
-        const data = await fetchProducts();
+        const skip = (currentPage - 1) * productsPerPage;
+        const data = await fetchProducts(productsPerPage, skip);
         if (data) {
           setProducts(data.products);
           setTotalProducts(data.total);
@@ -39,7 +43,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       }
     };
     loadProducts();
-  }, []);
+  }, [currentPage]);
   return (
     <ProductContext.Provider
       value={{
