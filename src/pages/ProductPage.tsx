@@ -8,7 +8,7 @@ import { useUserContext } from "../context/UserContext";
 import Header from "../components/header/Header";
 
 export default function ProductPage() {
-  const { products, loading, currentPage, setCurrentPage } =
+  const { products, loading, currentPage, setCurrentPage, totalProducts } =
     useProductContext();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [sortOption, setSortOption] = useState<string>("");
@@ -59,13 +59,7 @@ export default function ProductPage() {
   };
   const filteredProducts = filterAndSortProducts();
   const productsPerPage = 20;
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-  const paginatedProducts = () => {
-    return filteredProducts.slice(
-      (currentPage - 1) * productsPerPage,
-      currentPage * productsPerPage
-    );
-  };
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -83,7 +77,7 @@ export default function ProductPage() {
         isAuthenticated={isAuthenticated}
       />
 
-      <ProductGrid products={paginatedProducts()} />
+      <ProductGrid products={filteredProducts} />
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

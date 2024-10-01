@@ -8,11 +8,12 @@ interface ProductResponse {
 }
 
 export async function fetchProducts(
-  limit: number = 194
+  limit: number = 20,
+  skip: number = 0
 ): Promise<ProductResponse | undefined> {
   try {
     const response: AxiosResponse<ProductResponse> = await axios.get(
-      `https://dummyjson.com/products?limit=${limit}`
+      `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
     );
     return response.data;
   } catch (error) {
