@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { Product, Category } from "../types/product";
 import { AuthResponse, LoginCredentials } from "../types/user";
 
@@ -7,13 +7,17 @@ interface ProductResponse {
   total: number;
 }
 
+const api: AxiosInstance = axios.create({
+  baseURL: "https://dummyjson.com/",
+});
+
 export async function fetchProducts(
   limit: number = 20,
   skip: number = 0
 ): Promise<ProductResponse | undefined> {
   try {
-    const response: AxiosResponse<ProductResponse> = await axios.get(
-      `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+    const response: AxiosResponse<ProductResponse> = await api.get(
+      `/products?limit=${limit}&skip=${skip}`
     );
     return response.data;
   } catch (error) {
@@ -24,8 +28,8 @@ export async function fetchProducts(
 
 export async function fetchCategories(): Promise<Category[] | undefined> {
   try {
-    const response: AxiosResponse<Category[]> = await axios.get(
-      "https://dummyjson.com/products/categories"
+    const response: AxiosResponse<Category[]> = await api.get(
+      "/products/categories"
     );
     return response.data;
   } catch (error) {
@@ -38,8 +42,8 @@ export async function loginUser(
   setAuthenticated: (value: boolean) => void
 ) {
   try {
-    const response: AxiosResponse<AuthResponse> = await axios.post(
-      "https://dummyjson.com/auth/login",
+    const response: AxiosResponse<AuthResponse> = await api.post(
+      "/auth/login",
       credentials
     );
     const { accessToken, id } = response.data;
