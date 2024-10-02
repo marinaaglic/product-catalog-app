@@ -1,7 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
 import Search from "../filterAndSort/Search";
 import CategoryFilter from "../filterAndSort/CategoryFilter";
-import Sort from "../filterAndSort/Sort";
 import PriceRangeFilter from "../filterAndSort/PriceRangeFilter";
 import "../../styles/_header.scss";
 import Button from "../reusable/Button";
@@ -39,8 +38,10 @@ export default function Header({
       </button>
       <div className={`filter-sort-div ${showFilters ? "open" : "closed"}`}>
         <Search onSearchProduct={setSearchProduct} />
-        <CategoryFilter onCategoryChange={setSelectedCategory} />
-        <Sort onSortingOptionChange={setSortOption} />
+        <CategoryFilter
+          onCategoryChange={setSelectedCategory}
+          onSortingOptionChange={setSortOption}
+        />
         <PriceRangeFilter
           onMinPriceChange={setMinPrice}
           onMaxPriceChange={setMaxPrice}
