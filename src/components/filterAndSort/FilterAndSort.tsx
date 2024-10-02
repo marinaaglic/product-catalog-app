@@ -3,7 +3,7 @@ import { fetchCategories } from "../../utils/api/api";
 import { Category } from "../../utils/types/product";
 import "../../styles/_filter.scss";
 
-interface CategoryFilterProps {
+interface FilterAndSortProps {
   onCategoryChange: (category: string) => void;
   onSortingOptionChange: (option: string) => void;
 }
@@ -11,7 +11,7 @@ interface CategoryFilterProps {
 export default function CategoryFilter({
   onCategoryChange,
   onSortingOptionChange,
-}: CategoryFilterProps) {
+}: FilterAndSortProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>();
   useEffect(() => {
