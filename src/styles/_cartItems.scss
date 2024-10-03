@@ -14,23 +14,23 @@
 
   .items-div {
     display: flex;
-    align-items: center; // Center align items vertically
+    align-items: center;
     padding: 10px 0;
 
     .delete-icon {
       cursor: pointer;
       color: $burgundy;
-      margin-right: 10px; // Space between icon and product name
+      margin-right: 10px;
     }
 
     p {
-      margin: 0; // Remove default margin
-      flex: 1; // Allow flex items to grow
+      margin: 0;
+      flex: 1;
     }
 
     .product-price,
     .product-quantity {
-      text-align: right; // Align price and quantity to the right
+      text-align: right;
     }
   }
 
