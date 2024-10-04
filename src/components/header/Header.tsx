@@ -49,7 +49,7 @@ export default function Header({
       </div>
       <div className="button-div">
         {isAuthenticated ? (
-          <Button onClick={logout} className="btn-logout">
+          <Button onClick={logout} variant="danger">
             Logout
           </Button>
         ) : (

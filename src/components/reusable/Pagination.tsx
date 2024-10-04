@@ -15,9 +15,9 @@ export default function Pagination({
   return (
     <div className="pagination-wrapper">
       <Button
-        className="pagination-btn"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
+        variant="primary"
       >
         Previous
       </Button>
@@ -25,9 +25,9 @@ export default function Pagination({
         Page {currentPage} of {totalPages}
       </span>
       <Button
-        className="pagination-btn"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
+        variant="primary"
       >
         Next
       </Button>

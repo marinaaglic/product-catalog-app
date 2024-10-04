@@ -7,10 +7,6 @@
   box-sizing: border-box;
   padding: 100px;
 
-  h2 {
-    font-family: "Roboto", sans-serif;
-  }
-
   @media (max-width: 768px) {
     padding: 50px;
   }
@@ -43,7 +39,6 @@
   background: #ffffff;
   border-radius: 6px;
   padding: 10px 14px;
-  font-family: "Roboto", sans-serif;
 
   @media (max-width: 480px) {
     font-size: 14px;
@@ -52,17 +47,6 @@
 }
 
 .btn-login {
-  display: inline-block;
-  background-color: $madder;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  font-size: 14px;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 20px;
-
   @media (max-width: 480px) {
     padding: 5px 10px;
     font-size: 12px;
