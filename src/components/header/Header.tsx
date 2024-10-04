@@ -1,7 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
 import Search from "../filterAndSort/Search";
-import CategoryFilter from "../filterAndSort/CategoryFilter";
-import Sort from "../filterAndSort/Sort";
+import FilterAndSort from "../filterAndSort/FilterAndSort";
 import PriceRangeFilter from "../filterAndSort/PriceRangeFilter";
 import "../../styles/_header.scss";
 import Button from "../reusable/Button";
@@ -39,8 +38,10 @@ export default function Header({
       </button>
       <div className={`filter-sort-div ${showFilters ? "open" : "closed"}`}>
         <Search onSearchProduct={setSearchProduct} />
-        <CategoryFilter onCategoryChange={setSelectedCategory} />
-        <Sort onSortingOptionChange={setSortOption} />
+        <FilterAndSort
+          onCategoryChange={setSelectedCategory}
+          onSortingOptionChange={setSortOption}
+        />
         <PriceRangeFilter
           onMinPriceChange={setMinPrice}
           onMaxPriceChange={setMaxPrice}
@@ -48,7 +49,7 @@ export default function Header({
       </div>
       <div className="button-div">
         {isAuthenticated ? (
-          <Button onClick={logout} className="btn-logout">
+          <Button onClick={logout} variant="btn-logout">
             Logout
           </Button>
         ) : (

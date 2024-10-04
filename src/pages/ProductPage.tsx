@@ -25,6 +25,7 @@ export default function ProductPage() {
       currentProducts = currentProducts.filter(
         (product) => product.category === selectedCategory
       );
+      setCurrentPage(1);
     }
 
     if (minPrice !== null) {

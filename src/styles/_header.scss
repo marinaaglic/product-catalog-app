@@ -56,19 +56,7 @@
   }
 }
 
-.btn-logout {
-  background: none !important;
-  border: none;
-  padding: 0 !important;
-  font-family: "Roboto", sans-serif;
-  color: $chocolate-cosmos;
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: 15px;
-}
-
 .login-link {
-  font-family: "Roboto", sans-serif;
   color: $chocolate-cosmos;
   font-size: 15px;
 }
@@ -80,12 +68,10 @@
 @media (max-width: 585px) {
   .btn-filter {
     display: inline-flex;
-    font-family: "Roboto", sans-serif;
     background-color: $madder;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
-    font-family: "Poppins", sans-serif;
     border: 0;
     font-size: 15px;
     cursor: pointer;

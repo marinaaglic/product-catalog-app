@@ -39,11 +39,11 @@ export default function ProductCard({
       <h2>{product.title}</h2>
       <p>{truncatedDescription}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
-      <Button className="btn-show-details" onClick={onShowDetails}>
+      <Button onClick={onShowDetails} variant="primary">
         {" "}
         Show details
       </Button>
-      <Button className="btn-add-to-cart" onClick={handleAddToCart}>
+      <Button onClick={handleAddToCart} variant="primary">
         Add to cart
       </Button>
       {modalOpen && (
