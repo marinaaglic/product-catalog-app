@@ -35,6 +35,7 @@ export default function LoginPage() {
           id="username"
           type="text"
           className="login-input"
+          variant="login-input"
           onChange={(e) => setUsername(e.target.value)}
         />{" "}
         <Input
@@ -42,6 +43,7 @@ export default function LoginPage() {
           id="password"
           type="password"
           className="login-input"
+          variant="login-input"
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button type="submit" variant="primary">
