@@ -6,6 +6,7 @@ import Modal from "../components/reusable/Modal";
 import CartItems from "../components/cart/CartItems";
 import { useUserContext } from "../context/UserContext";
 import Header from "../components/header/Header";
+import { Product } from "../utils/types/product";
 
 export default function ProductPage() {
   const { products, loading, currentPage, setCurrentPage, totalProducts } =
@@ -14,12 +15,13 @@ export default function ProductPage() {
   const [sortOption, setSortOption] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
-  const [searchProduct, setSearchProduct] = useState<string>("");
+  const [searchProducts, setSearchProducts] = useState<Product[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { logout, isAuthenticated } = useUserContext();
 
   const filterAndSortProducts = () => {
-    let currentProducts = [...products];
+    let currentProducts =
+      searchProducts.length > 0 ? searchProducts : [...products];
 
     if (selectedCategory) {
       currentProducts = currentProducts.filter(
@@ -40,11 +42,11 @@ export default function ProductPage() {
       );
     }
 
-    if (searchProduct) {
-      currentProducts = currentProducts.filter((product) =>
-        product.title.toLowerCase().includes(searchProduct.toLowerCase())
-      );
-    }
+    // if (searchProduct) {
+    //   currentProducts = currentProducts.filter((product) =>
+    //     product.title.toLowerCase().includes(searchProduct.toLowerCase())
+    //   );
+    // }
 
     if (sortOption) {
       currentProducts.sort((a, b) => {
@@ -68,7 +70,7 @@ export default function ProductPage() {
   return (
     <div>
       <Header
-        setSearchProduct={setSearchProduct}
+        setSearchProduct={setSearchProducts}
         setSelectedCategory={setSelectedCategory}
         setSortOption={setSortOption}
         setMinPrice={setMinPrice}

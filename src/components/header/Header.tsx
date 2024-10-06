@@ -5,9 +5,10 @@ import PriceRangeFilter from "../filterAndSort/PriceRangeFilter";
 import "../../styles/_header.scss";
 import Button from "../reusable/Button";
 import { useState } from "react";
+import { Product } from "../../utils/types/product";
 
 interface HeaderProps {
-  setSearchProduct: (search: string) => void;
+  setSearchProduct: (products: Product[]) => void;
   setSelectedCategory: (category: string) => void;
   setSortOption: (option: string) => void;
   setMinPrice: (price: number | null) => void;
