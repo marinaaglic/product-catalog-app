@@ -55,3 +55,16 @@ export async function loginUser(
     console.log("An error occurred.", error);
   }
 }
+
+export async function searchProducts(
+  query: string
+): Promise<ProductResponse | undefined> {
+  try {
+    const response: AxiosResponse<ProductResponse> = await api.get(
+      `/products/search?q=${query}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("An error occurred.", error);
+  }
+}
