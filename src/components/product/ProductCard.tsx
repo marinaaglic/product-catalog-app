@@ -35,7 +35,7 @@ export default function ProductCard({
       : product.description;
   return (
     <div className="product-card">
-      <img src={product.thumbnail} alt={product.title} />
+      <img src={product.thumbnail} alt={product.title} loading="lazy" />
       <h2>{product.title}</h2>
       <p>{truncatedDescription}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
