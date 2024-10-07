@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Input from "../reusable/Input";
 import "../../styles/_priceRangeFilter.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 interface PriceRangeFilterProps {
   onMinPriceChange: (price: number | null) => void;
@@ -16,15 +18,15 @@ export default function PriceRangeFilter({
 
   const validatePrices = () => {
     if (minPrice !== null && minPrice < 0) {
-      alert("Minimalna cijena ne može biti negativna.");
+      toast.warning("Minimal price cannot be negative.");
       return false;
     }
     if (maxPrice !== null && maxPrice < 0) {
-      alert("Maksimalna cijena ne može biti negativna.");
+      toast.warning("Maximal price cannot be negative.");
       return false;
     }
     if (minPrice !== null && maxPrice !== null && minPrice > maxPrice) {
-      alert("Minimalna cijena ne može biti veća od maksimalne cijene.");
+      toast.warning("Minimal price cannot be greater than maximal price.");
       return false;
     }
     return true;
@@ -58,6 +60,7 @@ export default function PriceRangeFilter({
 
   return (
     <div className="div-price-range">
+      <ToastContainer />
       <Input
         type="number"
         id="min-price"
