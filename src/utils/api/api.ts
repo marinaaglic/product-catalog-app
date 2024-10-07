@@ -52,7 +52,7 @@ export async function loginUser(
     setAuthenticated(true);
     return response.data;
   } catch (error) {
-    console.log("An error occurred.", error);
+    throw error;
   }
 }
 

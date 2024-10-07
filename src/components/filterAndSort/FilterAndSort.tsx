@@ -14,6 +14,7 @@ export default function CategoryFilter({
 }: FilterAndSortProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>();
+
   useEffect(() => {
     const getCategories = async () => {
       const data = await fetchCategories();

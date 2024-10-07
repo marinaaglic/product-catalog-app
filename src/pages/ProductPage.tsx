@@ -42,12 +42,6 @@ export default function ProductPage() {
       );
     }
 
-    // if (searchProduct) {
-    //   currentProducts = currentProducts.filter((product) =>
-    //     product.title.toLowerCase().includes(searchProduct.toLowerCase())
-    //   );
-    // }
-
     if (sortOption) {
       currentProducts.sort((a, b) => {
         if (sortOption === "price-asc") return a.price - b.price;

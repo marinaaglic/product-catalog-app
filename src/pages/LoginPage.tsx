@@ -22,9 +22,12 @@ export default function LoginPage() {
     try {
       await loginUser(credentials, setAuthenticated);
       toast.success("You have succefully logged in!");
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 800);
     } catch (error) {
       toast.error("Username or password incorrect.");
+      return;
     }
   };
 
