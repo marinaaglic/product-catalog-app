@@ -14,6 +14,22 @@ export default function PriceRangeFilter({
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
 
+  const validatePrices = () => {
+    if (minPrice !== null && minPrice < 0) {
+      alert("Minimalna cijena ne može biti negativna.");
+      return false;
+    }
+    if (maxPrice !== null && maxPrice < 0) {
+      alert("Maksimalna cijena ne može biti negativna.");
+      return false;
+    }
+    if (minPrice !== null && maxPrice !== null && minPrice > maxPrice) {
+      alert("Minimalna cijena ne može biti veća od maksimalne cijene.");
+      return false;
+    }
+    return true;
+  };
+
   const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value ? Number(e.target.value) : null;
     setMinPrice(value);
@@ -26,6 +42,20 @@ export default function PriceRangeFilter({
     onMaxPriceChange(value);
   };
 
+  const handleMinPriceBlur = () => {
+    if (!validatePrices()) {
+      setMinPrice(null);
+      onMinPriceChange(null);
+    }
+  };
+
+  const handleMaxPriceBlur = () => {
+    if (!validatePrices()) {
+      setMaxPrice(null);
+      onMaxPriceChange(null);
+    }
+  };
+
   return (
     <div className="div-price-range">
       <Input
@@ -36,6 +66,7 @@ export default function PriceRangeFilter({
         value={minPrice !== null ? minPrice : ""}
         placeholder="$"
         onChange={handleMinPriceChange}
+        onBlur={handleMinPriceBlur}
       />
       <span> - </span>
       <Input
@@ -46,6 +77,7 @@ export default function PriceRangeFilter({
         value={maxPrice !== null ? maxPrice : ""}
         placeholder="$"
         onChange={handleMaxPriceChange}
+        onBlur={handleMaxPriceBlur}
       />
     </div>
   );
