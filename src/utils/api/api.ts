@@ -11,6 +11,13 @@ const api: AxiosInstance = axios.create({
   baseURL: "https://dummyjson.com/",
 });
 
+function getErrorMessage(error: any): string {
+  if (axios.isAxiosError(error) && error.response) {
+    return `Error ${error.response.status}: ${error.response.statusText}`;
+  }
+  return "An unexpected error occurred.";
+}
+
 export async function fetchProducts(
   limit: number = 20,
   skip: number = 0
@@ -21,7 +28,8 @@ export async function fetchProducts(
     );
     return response.data;
   } catch (error) {
-    console.log("Error fetching data: ", error);
+    const errorMessage = getErrorMessage(error);
+    alert(`Failed to fetch products. ${errorMessage}`);
     return;
   }
 }
@@ -33,7 +41,8 @@ export async function fetchCategories(): Promise<Category[] | undefined> {
     );
     return response.data;
   } catch (error) {
-    console.log("Error fetching data: ", error);
+    const errorMessage = getErrorMessage(error);
+    alert(`Failed to fetch categories. ${errorMessage}`);
   }
 }
 
@@ -52,7 +61,8 @@ export async function loginUser(
     setAuthenticated(true);
     return response.data;
   } catch (error) {
-    console.log("An error occurred.", error);
+    const errorMessage = getErrorMessage(error);
+    alert(`Login failed. ${errorMessage}`);
   }
 }
 
@@ -65,6 +75,7 @@ export async function searchProducts(
     );
     return response.data;
   } catch (error) {
-    console.log("An error occurred.", error);
+    const errorMessage = getErrorMessage(error);
+    alert(`Search failed. ${errorMessage}`);
   }
 }
