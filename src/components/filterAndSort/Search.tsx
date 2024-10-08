@@ -20,6 +20,9 @@ export default function Search({ onSearchProduct }: SearchProps) {
       try {
         const result = await searchProducts(value);
         if (result) {
+          if (result.products.length === 0) {
+            toast.info("No products found for your search.");
+          }
           onSearchProduct(result.products);
         } else {
           onSearchProduct([]);
