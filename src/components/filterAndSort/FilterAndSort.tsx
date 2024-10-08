@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { fetchCategories } from "../../utils/api/api";
 import { Category } from "../../utils/types/product";
 import "../../styles/_filter.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 interface FilterAndSortProps {
   onCategoryChange: (category: string) => void;
@@ -14,10 +16,13 @@ export default function CategoryFilter({
 }: FilterAndSortProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>();
+
   useEffect(() => {
     const getCategories = async () => {
       const data = await fetchCategories();
-      if (data) {
+      if (typeof data === "string") {
+        toast.error(data);
+      } else if (data) {
         setCategories(data);
       }
     };
@@ -35,6 +40,7 @@ export default function CategoryFilter({
   };
   return (
     <>
+      <ToastContainer />
       <div className="custom-select">
         <select value={selectedCategory} onChange={handleChange}>
           <option value="">Select a category</option>
