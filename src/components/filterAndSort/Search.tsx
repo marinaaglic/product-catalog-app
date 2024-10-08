@@ -11,6 +11,7 @@ interface SearchProps {
 
 export default function Search({ onSearchProduct }: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>("");
+  const [products, setProducts] = useState<Product[]>([]);
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -20,9 +21,7 @@ export default function Search({ onSearchProduct }: SearchProps) {
       try {
         const result = await searchProducts(value);
         if (result) {
-          if (result.products.length === 0) {
-            toast.info("No products found for your search.");
-          }
+          setProducts(result.products);
           onSearchProduct(result.products);
         } else {
           onSearchProduct([]);
@@ -36,6 +35,13 @@ export default function Search({ onSearchProduct }: SearchProps) {
       onSearchProduct([]);
     }
   };
+
+  const handleBlur = () => {
+    if (products.length === 0 && searchValue.trim()) {
+      toast.info("No products found for your search.");
+    }
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -46,6 +52,7 @@ export default function Search({ onSearchProduct }: SearchProps) {
         placeholder="Search"
         value={searchValue}
         onChange={handleSearch}
+        onBlur={handleBlur}
       />
     </div>
   );
