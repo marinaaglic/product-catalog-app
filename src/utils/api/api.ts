@@ -14,7 +14,7 @@ const api: AxiosInstance = axios.create({
 export async function fetchProducts(
   limit: number = 20,
   skip: number = 0
-): Promise<ProductResponse | undefined> {
+): Promise<ProductResponse | string> {
   try {
     const response: AxiosResponse<ProductResponse> = await api.get(
       `/products?limit=${limit}&skip=${skip}`
@@ -22,11 +22,11 @@ export async function fetchProducts(
     return response.data;
   } catch (error) {
     console.log("Error fetching data: ", error);
-    return;
+    return "Unable to fetch products. Please try again later.";
   }
 }
 
-export async function fetchCategories(): Promise<Category[] | undefined> {
+export async function fetchCategories(): Promise<Category[] | string> {
   try {
     const response: AxiosResponse<Category[]> = await api.get(
       "/products/categories"
@@ -34,6 +34,7 @@ export async function fetchCategories(): Promise<Category[] | undefined> {
     return response.data;
   } catch (error) {
     console.log("Error fetching data: ", error);
+    return "Unable to fetch categories. Please try again later.";
   }
 }
 

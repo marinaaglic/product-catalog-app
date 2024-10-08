@@ -17,7 +17,6 @@ export default function LoginPage() {
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    event.preventDefault();
     const credentials: LoginCredentials = { username, password };
     try {
       await loginUser(credentials, setAuthenticated);

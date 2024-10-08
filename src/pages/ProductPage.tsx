@@ -9,8 +9,14 @@ import Header from "../components/header/Header";
 import { Product } from "../utils/types/product";
 
 export default function ProductPage() {
-  const { products, loading, currentPage, setCurrentPage, totalProducts } =
-    useProductContext();
+  const {
+    products,
+    loading,
+    currentPage,
+    error,
+    setCurrentPage,
+    totalProducts,
+  } = useProductContext();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [sortOption, setSortOption] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number | null>(null);
@@ -60,6 +66,9 @@ export default function ProductPage() {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error}</div>;
   }
   return (
     <div>

@@ -13,6 +13,7 @@ type ProductContextType = {
   loading: boolean;
   currentPage: number;
   totalProducts: number;
+  error: string | null;
   setCurrentPage: (page: number) => void;
 };
 
@@ -23,21 +24,25 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalProducts, setTotalProducts] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
 
   const productsPerPage = 20;
 
   useEffect(() => {
     const loadProducts = async () => {
       setLoading(true);
+      setError(null);
       try {
         const skip = (currentPage - 1) * productsPerPage;
         const data = await fetchProducts(productsPerPage, skip);
-        if (data) {
+        if (typeof data === "string") {
+          setError(data);
+        } else if (data) {
           setProducts(data.products);
           setTotalProducts(data.total);
         }
       } catch (error) {
-        console.log("Error fetching products, ", error);
+        setError("Failed to load products. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -51,6 +56,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         loading,
         currentPage,
         totalProducts,
+        error,
         setCurrentPage,
       }}
     >

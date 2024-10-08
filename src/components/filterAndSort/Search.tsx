@@ -2,6 +2,8 @@ import { useState } from "react";
 import Input from "../reusable/Input";
 import { searchProducts } from "../../utils/api/api";
 import { Product } from "../../utils/types/product";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 interface SearchProps {
   onSearchProduct: (products: Product[]) => void;
@@ -15,11 +17,17 @@ export default function Search({ onSearchProduct }: SearchProps) {
     setSearchValue(value);
 
     if (value.trim()) {
-      const result = await searchProducts(value);
-      if (result) {
-        onSearchProduct(result.products);
-      } else {
-        onSearchProduct([]);
+      try {
+        const result = await searchProducts(value);
+        if (result) {
+          onSearchProduct(result.products);
+        } else {
+          onSearchProduct([]);
+        }
+      } catch (error) {
+        toast.error(
+          "An error occurred while searching for products. Please try again."
+        );
       }
     } else {
       onSearchProduct([]);
@@ -27,6 +35,7 @@ export default function Search({ onSearchProduct }: SearchProps) {
   };
   return (
     <div>
+      <ToastContainer />
       <Input
         type="text"
         id="search-value"
