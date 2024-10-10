@@ -96,6 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem(`cart_${storedUserId}`, JSON.stringify(cartItems));
     }
     localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
     localStorage.removeItem("userId");
     setIsAuthenticated(false);
     setCartItems([]);
