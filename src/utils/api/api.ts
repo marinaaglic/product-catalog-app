@@ -47,8 +47,9 @@ export async function loginUser(
       "/auth/login",
       credentials
     );
-    const { accessToken, id } = response.data;
-    localStorage.setItem("token", accessToken);
+    const { accessToken, refreshToken, id } = response.data;
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("userId", id.toString());
     setAuthenticated(true);
     return response.data;
@@ -56,6 +57,55 @@ export async function loginUser(
     throw error;
   }
 }
+
+export async function refreshAccessToken() {
+  const refreshToken = localStorage.getItem("refreshToken");
+  if (!refreshToken) {
+    return null;
+  }
+
+  try {
+    const { data } = await api.post("auth/refresh", {
+      refreshToken: refreshToken,
+      expiresInMins: 30,
+    });
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+    return data.accessToken;
+  } catch (error: any) {
+    console.log("Failed to refresh token:", error.response?.data || error);
+    return null;
+  }
+}
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const accessToken = await refreshAccessToken();
+        if (!accessToken) {
+          throw new Error("Unable to refresh token");
+        }
+
+        originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+        return api(originalRequest);
+      } catch (error) {
+        console.log("Refresh token is invalid, logging out.");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export async function searchProducts(
   query: string
