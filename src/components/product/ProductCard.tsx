@@ -1,9 +1,10 @@
 import { Product } from "../../utils/types/product";
 import "../../styles/_productCard.scss";
-import { useUserContext } from "../../context/UserContext";
+//import { useUserContext } from "../../context/UserContext";
 import Modal from "../reusable/Modal";
 import { useState } from "react";
 import Button from "../reusable/Button";
+import { refreshAccessToken } from "../../utils/api/api";
 
 interface ProductCardProps {
   product: Product;
@@ -16,23 +17,30 @@ export default function ProductCard({
   onShowDetails,
   onAddToCart,
 }: ProductCardProps) {
-  const { isAuthenticated } = useUserContext();
+  //const { isAuthenticated } = useUserContext();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const handleAddToCart = () => {
-    if (!isAuthenticated) {
-      setModalOpen(true);
-    } else {
-      onAddToCart(product);
+  const handleAddToCart = async () => {
+    const savedToken = localStorage.getItem("accessToken");
+    if (!savedToken) {
+      const newAccessToken = await refreshAccessToken();
+      if (!newAccessToken) {
+        setModalOpen(true);
+        return;
+      }
     }
+    onAddToCart(product);
   };
+
   const closeModal = () => {
     setModalOpen(false);
   };
+
   const truncatedDescription =
     product.description.length > 100
       ? product.description.slice(0, 100) + "..."
       : product.description;
+
   return (
     <div className="product-card">
       <img src={product.thumbnail} alt={product.title} loading="lazy" />

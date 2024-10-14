@@ -48,13 +48,33 @@ export async function loginUser(
       credentials
     );
     const { accessToken, refreshToken, id } = response.data;
-    localStorage.setItem("token", accessToken);
+    localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("userId", id.toString());
     setAuthenticated(true);
     return response.data;
   } catch (error) {
     throw error;
+  }
+}
+
+export async function refreshAccessToken() {
+  const refreshToken = localStorage.getItem("refreshToken");
+  if (!refreshToken) {
+    return null;
+  }
+
+  try {
+    const { data } = await api.post("auth/refresh", {
+      refreshToken: refreshToken,
+      expiresInMins: 30,
+    });
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+    return data.accessToken;
+  } catch (error: any) {
+    console.log("Failed to refresh token:", error.response?.data || error);
+    return null;
   }
 }
 
@@ -69,20 +89,16 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem("refreshToken");
+        const accessToken = await refreshAccessToken();
+        if (!accessToken) {
+          throw new Error("Unable to refresh token");
+        }
 
-        const { data } = await api.post("/auth/refresh", {
-          token: refreshToken,
-        });
-
-        localStorage.setItem("token", data.accessToken);
-
-        originalRequest.headers["Authorization"] = `Bearer ${data.accessToken}`;
-
+        originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
         return api(originalRequest);
       } catch (error) {
-        console.log("Refresh token is invalid, logging out,");
-        localStorage.removeItem("token");
+        console.log("Refresh token is invalid, logging out.");
+        localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         window.location.href = "/login";
       }

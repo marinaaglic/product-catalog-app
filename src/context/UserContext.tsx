@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import { Product } from "../utils/types/product";
+import { refreshAccessToken } from "../utils/api/api";
 
 type AuthType = {
   isAuthenticated: boolean;
@@ -31,10 +32,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
 
   useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    const storedUserId = localStorage.getItem("userId");
+    const checkAuthentication = async () => {
+      const savedToken = localStorage.getItem("accessToken");
+      const storedUserId = localStorage.getItem("userId");
 
-    if (savedToken) {
+      if (!savedToken) {
+        const newAccessToken = await refreshAccessToken();
+        if (!newAccessToken) {
+          setIsAuthenticated(false);
+          return;
+        }
+      }
       setIsAuthenticated(true);
 
       if (storedUserId) {
@@ -43,7 +51,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setCartItems(JSON.parse(userCart));
         }
       }
-    }
+    };
+
+    checkAuthentication();
   }, []);
 
   useEffect(() => {
@@ -95,7 +105,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (storedUserId) {
       localStorage.setItem(`cart_${storedUserId}`, JSON.stringify(cartItems));
     }
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("userId");
     setIsAuthenticated(false);
