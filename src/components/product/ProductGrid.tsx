@@ -20,10 +20,16 @@ export default function ProductGrid({ products }: { products: Product[] }) {
     setModalOpen(false);
     setSelectedProduct(null);
   };
-  const handleAddToCart = (product: Product) => {
-    addToCart(product);
-    alert("Product is added to your cart!");
+
+  const handleAddToCart = (product: Product, quantity: number) => {
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    alert(
+      `${quantity} ${quantity === 1 ? "item" : "items"} added to your cart!`
+    );
   };
+
   return (
     <div>
       <div className="grid-product">
