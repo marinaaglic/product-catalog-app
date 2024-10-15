@@ -5,6 +5,7 @@ import "../../styles/_productGrid.scss";
 import Modal from "../reusable/Modal";
 import ProductDetails from "./ProductDetails";
 import { useUserContext } from "../../context/UserContext";
+import { toast } from "react-toastify";
 
 export default function ProductGrid({ products }: { products: Product[] }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -20,10 +21,16 @@ export default function ProductGrid({ products }: { products: Product[] }) {
     setModalOpen(false);
     setSelectedProduct(null);
   };
-  const handleAddToCart = (product: Product) => {
-    addToCart(product);
-    alert("Product is added to your cart!");
+
+  const handleAddToCart = (product: Product, quantity: number) => {
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    toast.success(
+      `${quantity} ${quantity === 1 ? "item" : "items"} added to your cart!`
+    );
   };
+
   return (
     <div>
       <div className="grid-product">

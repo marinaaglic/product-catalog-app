@@ -4,11 +4,12 @@ import Modal from "../reusable/Modal";
 import { useState } from "react";
 import Button from "../reusable/Button";
 import { refreshAccessToken } from "../../utils/api/api";
+import Input from "../reusable/Input";
 
 interface ProductCardProps {
   product: Product;
   onShowDetails: () => void;
-  onAddToCart: (product: Product) => void;
+  onAddToCart: (product: Product, quantity: number) => void;
 }
 
 export default function ProductCard({
@@ -17,6 +18,7 @@ export default function ProductCard({
   onAddToCart,
 }: ProductCardProps) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(1);
 
   const handleAddToCart = async () => {
     const savedToken = localStorage.getItem("accessToken");
@@ -27,7 +29,7 @@ export default function ProductCard({
         return;
       }
     }
-    onAddToCart(product);
+    onAddToCart(product, quantity);
   };
 
   const closeModal = () => {
@@ -49,9 +51,21 @@ export default function ProductCard({
         {" "}
         Show details
       </Button>
-      <Button onClick={handleAddToCart} variant="primary">
-        Add to cart
-      </Button>
+      <div className="quantity-div">
+        <Input
+          type="number"
+          id={product.id.toString()}
+          name={product.id.toString()}
+          variant="range-input"
+          value={quantity}
+          onChange={(e) => setQuantity(Number(e.target.value))}
+          min={1}
+        />
+        <Button onClick={handleAddToCart} variant="primary">
+          Add to cart
+        </Button>
+      </div>
+
       {modalOpen && (
         <Modal
           title="Login Required"

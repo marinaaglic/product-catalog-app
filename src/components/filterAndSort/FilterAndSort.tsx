@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchCategories } from "../../utils/api/api";
 import { Category } from "../../utils/types/product";
 import "../../styles/_filter.scss";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/ReactToastify.css";
+import { toast } from "react-toastify";
 
 interface FilterAndSortProps {
   onCategoryChange: (category: string) => void;
@@ -40,7 +39,6 @@ export default function CategoryFilter({
   };
   return (
     <>
-      <ToastContainer />
       <div className="custom-select">
         <select value={selectedCategory} onChange={handleChange}>
           <option value="">Select a category</option>

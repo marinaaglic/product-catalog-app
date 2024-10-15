@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Input from "../reusable/Input";
 import "../../styles/_priceRangeFilter.scss";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/ReactToastify.css";
+import { toast } from "react-toastify";
 
 interface PriceRangeFilterProps {
   onMinPriceChange: (price: number | null) => void;
@@ -60,7 +59,6 @@ export default function PriceRangeFilter({
 
   return (
     <div className="div-price-range">
-      <ToastContainer />
       <Input
         type="number"
         id="min-price"

@@ -6,8 +6,8 @@ import { LoginCredentials } from "../utils/types/user";
 import { useUserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/reusable/Button";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/ReactToastify.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
@@ -32,7 +32,6 @@ export default function LoginPage() {
 
   return (
     <div className="form-wrapper">
-      <ToastContainer />
       <form onSubmit={handleLogin} className="login-form">
         <h2>Login form</h2>
         <Input
