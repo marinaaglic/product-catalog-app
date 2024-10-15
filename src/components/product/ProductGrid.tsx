@@ -5,8 +5,7 @@ import "../../styles/_productGrid.scss";
 import Modal from "../reusable/Modal";
 import ProductDetails from "./ProductDetails";
 import { useUserContext } from "../../context/UserContext";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function ProductGrid({ products }: { products: Product[] }) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -34,7 +33,6 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
   return (
     <div>
-      <ToastContainer />
       <div className="grid-product">
         {products.map((product) => (
           <ProductCard

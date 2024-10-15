@@ -2,8 +2,7 @@ import { useState } from "react";
 import Input from "../reusable/Input";
 import { searchProducts } from "../../utils/api/api";
 import { Product } from "../../utils/types/product";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 interface SearchProps {
   onSearchProduct: (products: Product[]) => void;
@@ -44,7 +43,6 @@ export default function Search({ onSearchProduct }: SearchProps) {
 
   return (
     <div>
-      <ToastContainer />
       <Input
         type="text"
         id="search-value"
