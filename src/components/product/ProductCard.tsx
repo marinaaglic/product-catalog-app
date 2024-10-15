@@ -4,6 +4,7 @@ import Modal from "../reusable/Modal";
 import { useState } from "react";
 import Button from "../reusable/Button";
 import { refreshAccessToken } from "../../utils/api/api";
+import Input from "../reusable/Input";
 
 interface ProductCardProps {
   product: Product;
@@ -49,9 +50,18 @@ export default function ProductCard({
         {" "}
         Show details
       </Button>
-      <Button onClick={handleAddToCart} variant="primary">
-        Add to cart
-      </Button>
+      <div className="quantity-div">
+        <Input
+          type="number"
+          id="quantity"
+          name="quantity"
+          variant="range-input"
+        />
+        <Button onClick={handleAddToCart} variant="primary">
+          Add to cart
+        </Button>
+      </div>
+
       {modalOpen && (
         <Modal
           title="Login Required"
