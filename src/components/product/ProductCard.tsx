@@ -55,7 +55,7 @@ export default function ProductCard({
         <Input
           type="number"
           id={product.id.toString()}
-          name="quantity"
+          name={product.id.toString()}
           variant="range-input"
           value={quantity}
           onChange={(e) => setQuantity(Number(e.target.value))}

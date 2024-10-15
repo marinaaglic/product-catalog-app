@@ -3,7 +3,7 @@ import Input from "../reusable/Input";
 import { searchProducts } from "../../utils/api/api";
 import { Product } from "../../utils/types/product";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 interface SearchProps {
   onSearchProduct: (products: Product[]) => void;

@@ -7,7 +7,7 @@ import { useUserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/reusable/Button";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
