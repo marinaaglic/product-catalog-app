@@ -25,6 +25,11 @@ export default function ProductPage() {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { logout, isAuthenticated } = useUserContext();
 
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
   const filterAndSortProducts = () => {
     let currentProducts =
       searchProducts.length > 0 ? searchProducts : [...products];
@@ -33,7 +38,6 @@ export default function ProductPage() {
       currentProducts = currentProducts.filter(
         (product) => product.category === selectedCategory
       );
-      setCurrentPage(1);
     }
 
     if (minPrice !== null) {
@@ -60,9 +64,19 @@ export default function ProductPage() {
 
     return currentProducts;
   };
+
   const filteredProducts = filterAndSortProducts();
   const productsPerPage = 20;
-  const totalPages = Math.ceil(totalProducts / productsPerPage);
+  const isFiltered =
+    searchProducts.length > 0 ||
+    selectedCategory ||
+    minPrice !== null ||
+    maxPrice !== null ||
+    sortOption;
+
+  const totalPages = isFiltered
+    ? Math.ceil(filteredProducts.length / productsPerPage)
+    : Math.ceil(totalProducts / productsPerPage);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -74,7 +88,7 @@ export default function ProductPage() {
     <div>
       <Header
         setSearchProduct={setSearchProducts}
-        setSelectedCategory={setSelectedCategory}
+        setSelectedCategory={handleCategoryChange}
         setSortOption={setSortOption}
         setMinPrice={setMinPrice}
         setMaxPrice={setMaxPrice}
